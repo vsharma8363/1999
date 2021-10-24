@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context=".LoginSignup">
+
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="347dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/verification_code_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="ex: 012345"
+            android:inputType="number" />
+
+        <TextView
+            android:id="@+id/verificationStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+        <Button
+            android:id="@+id/verify_code_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="verifyCode"
+            android:text="Verify SMS" />
+
+        <TextView
+            android:id="@+id/resend_code_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:onClick="resendVerification"
+            android:text="Didn't get a code? Click here to resend"
+            android:textColor="@android:color/holo_blue_dark" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
