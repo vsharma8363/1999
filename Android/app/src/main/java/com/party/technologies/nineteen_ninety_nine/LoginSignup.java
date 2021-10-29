@@ -3,6 +3,7 @@ package com.party.technologies.nineteen_ninety_nine;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -117,15 +118,19 @@ public class LoginSignup extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            UserStorage.initialize(mAuth.getCurrentUser());
-                            // Wait until the user data has loaded before navigating to home screen.
-                            while(!UserStorage.isUserDataLoadedFromServer()) {}
-                            Intent nextPage;
-                            if(UserStorage.isNewUser())
-                                nextPage = new Intent(LoginSignup.this, SetupProfile.class);
-                            else
-                                nextPage = new Intent(LoginSignup.this, Home.class);
-                            LoginSignup.this.startActivity(nextPage);
+                            new Thread(new Runnable() {
+                                public void run() {
+                                    UserStorage.initialize(mAuth.getCurrentUser());
+                                    // Wait until the user data has loaded before navigating to home screen.
+                                    while(!UserStorage.isUserDataLoadedFromServer()) {}
+                                    Intent nextPage;
+                                    if(UserStorage.isNewUser())
+                                        nextPage = new Intent(LoginSignup.this, SetupProfile.class);
+                                    else
+                                        nextPage = new Intent(LoginSignup.this, Home.class);
+                                    LoginSignup.this.startActivity(nextPage);
+                                }
+                            }).start();
                         } else {
                             // Failure
                         }
