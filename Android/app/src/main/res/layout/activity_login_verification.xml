@@ -28,7 +28,7 @@
             android:id="@+id/verificationStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="Please enter your verification code above" />
 
         <Button
             android:id="@+id/verify_code_button"

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -47,15 +48,12 @@ public class LoginSignup extends AppCompatActivity {
 
             @Override
             public void onVerificationFailed(FirebaseException e) {
-                verificationStatus.setText("Phone number is not in correct format!");
-
                 if (e instanceof FirebaseAuthInvalidCredentialsException) {
                     // Invalid request
                 } else if (e instanceof FirebaseTooManyRequestsException) {
                     // The SMS quota for the project has been exceeded
                 }
 
-                // Show a message and update the UI
             }
 
             @Override
@@ -86,12 +84,6 @@ public class LoginSignup extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null) {
-            Intent homeIntent = new Intent(LoginSignup.this, Home.class);
-            LoginSignup.this.startActivity(homeIntent);
-        }
     }
 
 
@@ -125,9 +117,15 @@ public class LoginSignup extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            UserStorage.setFirebaseUser(mAuth.getCurrentUser());
-                            Intent homeIntent = new Intent(LoginSignup.this, Home.class);
-                            LoginSignup.this.startActivity(homeIntent);
+                            UserStorage.initialize(mAuth.getCurrentUser());
+                            // Wait until the user data has loaded before navigating to home screen.
+                            while(!UserStorage.isUserDataLoadedFromServer()) {}
+                            Intent nextPage;
+                            if(UserStorage.isNewUser())
+                                nextPage = new Intent(LoginSignup.this, SetupProfile.class);
+                            else
+                                nextPage = new Intent(LoginSignup.this, Home.class);
+                            LoginSignup.this.startActivity(nextPage);
                         } else {
                             // Failure
                         }

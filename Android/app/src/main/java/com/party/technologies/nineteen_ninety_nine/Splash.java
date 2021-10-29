@@ -19,20 +19,26 @@ public class Splash extends Activity {
         setContentView(R.layout.activity_splash);
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        // 3 second splash screen.
+        // 5 second splash screen.
         final Thread checkUserSleepThread = new Thread(){
             public void run(){
                 if(currentUser != null) {
-                    // Current user is signed in.
-                    UserStorage.setFirebaseUser(currentUser);
-                    nextPage = new Intent(Splash.this, Home.class);
+                    // Some user is signed in.
+                    UserStorage.initialize(currentUser);
+                    // Wait until the user data has loaded before navigating to home screen.
+                    while(!UserStorage.isUserDataLoadedFromServer()) {}
+                    if(UserStorage.isNewUser())
+                        nextPage = new Intent(Splash.this, SetupProfile.class);
+                    else
+                        nextPage = new Intent(Splash.this, Home.class);
                 }
                 else {
                     // No user is signed in.
+                    // Direct the user to the Login/Signup Screen.
                     nextPage = new Intent(Splash.this, LoginSignup.class);
                 }
                 try{
-                    sleep(5000);
+                    sleep(3000);
                 }catch(InterruptedException e){
                     e.printStackTrace();
                 }finally{

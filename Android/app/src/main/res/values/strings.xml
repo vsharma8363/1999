@@ -9,4 +9,8 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <string name="placeholder_name">Miley Cyrus</string>
+    <string name="placeholder_email">miley@cyrus.com</string>
+    <string name="placeholder_bio">Hi, I want to join your party!</string>
 </resources>

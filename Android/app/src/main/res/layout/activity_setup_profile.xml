@@ -13,35 +13,57 @@
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp">
 
+        <TextView
+            android:id="@+id/full_name_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Full Name:" />
+
         <EditText
             android:id="@+id/full_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            android:gravity="left"
+            android:hint="@string/placeholder_name"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/email_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Email:" />
 
         <EditText
             android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            android:gravity="left"
+            android:hint="@string/placeholder_email"
+            android:inputType="textEmailAddress" />
+
+        <TextView
+            android:id="@+id/bio_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bio:" />
 
         <EditText
             android:id="@+id/bio"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            android:gravity="left"
+            android:hint="@string/placeholder_bio"
+            android:inputType="text" />
 
         <Button
             android:id="@+id/submit"
-            android:onClick="submitProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:onClick="submitProfile"
+            android:text="Submit Changes" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

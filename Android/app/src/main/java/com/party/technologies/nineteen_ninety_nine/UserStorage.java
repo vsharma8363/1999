@@ -1,21 +1,18 @@
 package com.party.technologies.nineteen_ninety_nine;
 
-import static android.content.ContentValues.TAG;
+import android.graphics.Color;
 
-import android.util.Log;
+import androidx.annotation.Nullable;
 
-import androidx.annotation.NonNull;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,73 +20,109 @@ import java.util.Map;
 public class UserStorage {
 
     private static FirebaseUser fbUser;
-    private static User user;
     private static FirebaseFirestore db;
     private static DocumentReference userRef;
-    private static boolean loadingUserData;
+    private static Map<String, Object> userData;
+    private static boolean userDataLoadedFromServer;
+    private static boolean partyDataLoadedFromServer;
 
-    public static void setFirebaseUser(FirebaseUser firebaseUser) {
-        loadingUserData = false;
+    public static void initialize(FirebaseUser firebaseUser) {
+        userDataLoadedFromServer = false;
+        partyDataLoadedFromServer = false;
         fbUser = firebaseUser;
         db = FirebaseFirestore.getInstance();
         userRef = db.collection("users").document(fbUser.getUid());
-        loadUserData();
+        userDataBackgroundUpdater();
     }
 
-    public static boolean isLoadingUserData() {
-        return loadingUserData;
-    }
-
-    public static boolean isUserSetup() {
-        return user != null;
-    }
-
-    public static User getUser() {
-        return user;
-    }
-
-    public static void updateUserData(User user) {
-        loadingUserData = true;
-        userRef.set(user)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        loadUserData();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error writing document", e);
-                    }
-                });
-    }
-
-    public static void wipeStoredData() {
-        fbUser = null;
-    }
-
-    public static String getUID() {
-        return fbUser.getUid();
-    }
-
-    private static void loadUserData() {
-        loadingUserData = true;
-        userRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+    /**Updates user data in the background using snapshots (Call once and forget).**/
+    private static void userDataBackgroundUpdater() {
+        userRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        user = document.toObject(User.class);
-                    } else {
-                        user = null;
-                    }
-                    loadingUserData = false;
-                } else {
-                    Log.d(TAG, "get() failed with ", task.getException());
+            public void onEvent(@Nullable DocumentSnapshot snapshot,
+                                @Nullable FirebaseFirestoreException e) {
+                userData = snapshot.getData();
+                if(userData == null) {
+                    // This is a new user, set default values for user.
+                    userData = new HashMap<String, Object>();
+                    userData.put("phone_number", fbUser.getPhoneNumber());
+                    userData.put("mile_range", 5.0);
                 }
+                else {
+                    // This user is already registered.
+                    resetLoginTime();
+                }
+                userDataLoadedFromServer = true;
             }
         });
+    }
+
+    public static boolean isUserDataLoadedFromServer() {
+        return userDataLoadedFromServer;
+    }
+
+    public static boolean isPartyDataLoadedFromServer() {
+        return partyDataLoadedFromServer;
+    }
+
+    public static boolean isNewUser() {
+        return userData.get("last_login") == null;
+    }
+
+    public static void resetLoginTime() {
+        userData.put("last_login", System.currentTimeMillis());
+    }
+
+    public static void logout() {
+        fbUser = null;
+        userRef = null;
+        FirebaseAuth.getInstance().signOut();
+        userData = null;
+    }
+
+    public static String getFullName() {
+        return userData.get("full_name").toString();
+    }
+
+    public static void setFullName(String fullName) {
+        userData.put("full_name", fullName);
+        userRef.set(userData);
+    }
+
+    public static String getEmail() {
+        return userData.get("email").toString();
+    }
+
+    public static void setEmail(String email) {
+        userData.put("email", email);
+        userRef.set(userData);
+    }
+
+    public static String getPhoneNumber() {
+        return userData.get("phone_number").toString();
+    }
+
+    public static String getBio() {
+        return userData.get("bio").toString();
+    }
+
+    public static void setBio(String bio) {
+        userData.put("bio", bio);
+        userRef.set(userData);
+    }
+
+    public static void setBirthday(Date birthday) {
+        System.out.println(birthday);
+        userData.put("birthday_millis", birthday.getTime());
+        userRef.set(userData);
+    }
+
+    public static void setMileRange(double miles) {
+        userData.put("mile_range", miles);
+        userRef.set(userData);
+    }
+
+    public static double getMileRange() {
+        return Double.parseDouble(userData.get("mile_range").toString());
     }
 }

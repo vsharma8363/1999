@@ -4,12 +4,14 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.1381340579710145" />
-        <entry key="app/src/main/res/layout/activity_login_signup.xml" value="0.1381340579710145" />
-        <entry key="app/src/main/res/layout/activity_login_verification.xml" value="0.1381340579710145" />
+        <entry key="app/src/main/res/layout/activity_login_signup.xml" value="0.1715651733962847" />
+        <entry key="app/src/main/res/layout/activity_login_verification.xml" value="0.48417132216014896" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.11197916666666667" />
+        <entry key="app/src/main/res/layout/activity_party_creator.xml" value="0.17889492753623187" />
         <entry key="app/src/main/res/layout/activity_profile_creator.xml" value="0.1381340579710145" />
-        <entry key="app/src/main/res/layout/activity_setup_profile.xml" value="0.1322463768115942" />
+        <entry key="app/src/main/res/layout/activity_setup_profile.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.1381340579710145" />
+        <entry key="app/src/main/res/layout/activity_test.xml" value="0.11043566362715299" />
         <entry key="app/src/main/res/layout/activity_verify_phone.xml" value="0.1" />
       </map>
     </option>

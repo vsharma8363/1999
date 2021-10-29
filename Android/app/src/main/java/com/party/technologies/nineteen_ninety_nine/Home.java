@@ -18,24 +18,22 @@ public class Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        if(!UserStorage.isUserSetup()) {
-            Intent setupProfile = new Intent(Home.this, SetupProfile.class);
-            Home.this.startActivity(setupProfile);
-        }
         testData = (TextView)findViewById(R.id.testData);
-        testData.setText(UserStorage.getUser().getFullName() + "\n" +
-                UserStorage.getUser().getBio());
-    }
-
-    public void logOut(View v) {
-        FirebaseAuth.getInstance().signOut();
-        UserStorage.wipeStoredData();
-        Intent login = new Intent(Home.this, LoginSignup.class);
-        Home.this.startActivity(login);
+        testData.setText(
+                UserStorage.getFullName() + "\n" +
+                UserStorage.getEmail() + "\n" +
+                UserStorage.getPhoneNumber() + "\n" +
+                UserStorage.getBio() + "\n" +
+                UserStorage.getMileRange());
     }
 
     public void editProfile(View v) {
-        //Intent profileCreator = new Intent(Home.this, SetupProfile.class);
-        //Home.this.startActivity(profileCreator);
+        startActivity(new Intent(Home.this, SetupProfile.class));
     }
+
+    public void logOut(View v) {
+        UserStorage.logout();
+        startActivity(new Intent(Home.this, LoginSignup.class));
+    }
+
 }
