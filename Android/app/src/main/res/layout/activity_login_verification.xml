@@ -21,14 +21,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="ex: 012345"
+            android:hint="ex: 123456"
             android:inputType="number" />
-
-        <TextView
-            android:id="@+id/verificationStatus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Please enter your verification code above" />
 
         <Button
             android:id="@+id/verify_code_button"

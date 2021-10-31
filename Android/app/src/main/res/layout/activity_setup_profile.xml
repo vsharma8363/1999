@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:gravity="left"
-            android:hint="@string/placeholder_name"
+            android:hint="ex: Miley Cyrus"
             android:inputType="textPersonName" />
 
         <TextView
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:gravity="left"
-            android:hint="@string/placeholder_email"
+            android:hint="ex: miley@cyrus.com"
             android:inputType="textEmailAddress" />
 
         <TextView
@@ -55,7 +55,7 @@
             android:layout_height="200dp"
             android:ems="10"
             android:gravity="left"
-            android:hint="@string/placeholder_bio"
+            android:hint="ex: Let's party together :)"
             android:inputType="text" />
 
         <Button

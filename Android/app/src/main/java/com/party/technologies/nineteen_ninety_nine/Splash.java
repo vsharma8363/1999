@@ -1,9 +1,6 @@
 package com.party.technologies.nineteen_ninety_nine;
 
-import static java.lang.Thread.sleep;
-
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import com.google.firebase.auth.FirebaseAuth;

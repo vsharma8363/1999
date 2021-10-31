@@ -8,25 +8,29 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="bottom|center"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
+        <net.rimoto.intlphoneinput.IntlPhoneInput
             android:id="@+id/phone_number_signup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="+1 (202) 456-1111"
-            android:inputType="phone" />
+            android:inputType="phone">
+
+        </net.rimoto.intlphoneinput.IntlPhoneInput>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="signUp"
             android:text="->" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
