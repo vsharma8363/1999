@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.party.technologies.nineteen_ninety_nine.data.User;
+import com.party.technologies.nineteen_ninety_nine.data.UserInterface;
 
 public class SetupProfile extends AppCompatActivity {
 
@@ -29,10 +30,11 @@ public class SetupProfile extends AppCompatActivity {
         bioView = (TextView)findViewById(R.id.bio_textview);
         bio = (EditText)findViewById(R.id.bio);
         // If user is editing a profile already setup, populate screen with data.
-        if(!User.isNewUser()) {
-            fullName.setText(User.getFullName());
-            email.setText(User.getEmail());
-            bio.setText(User.getBio());
+        if(!UserInterface.isNewUser()) {
+            User currentUser = UserInterface.getCurrentUser();
+            fullName.setText(currentUser.getFullName());
+            email.setText(currentUser.getEmail());
+            bio.setText(currentUser.getBio());
         }
     }
 
@@ -50,10 +52,15 @@ public class SetupProfile extends AppCompatActivity {
             bioView.setTextColor(Color.RED);
         }
         else {
-            User.setFullName(fullName.getText().toString());
-            User.setEmail(email.getText().toString());
-            User.setBio(bio.getText().toString());
-            User.resetLoginTime();
+            // If user is new, setup a new user profile.
+            if(UserInterface.isNewUser())
+                UserInterface.setupNewUser();
+            // Get the current user and update data.
+            User currentUser = UserInterface.getCurrentUser();
+            currentUser.setFullName(fullName.getText().toString());
+            currentUser.setEmail(email.getText().toString());
+            currentUser.setBio(bio.getText().toString());
+            UserInterface.updateUserData();
             startActivity(new Intent(SetupProfile.this, Home.class));
         }
     }

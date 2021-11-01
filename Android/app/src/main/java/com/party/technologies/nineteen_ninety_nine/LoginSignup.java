@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
-import com.party.technologies.nineteen_ninety_nine.data.User;
+import com.party.technologies.nineteen_ninety_nine.data.UserInterface;
 
 import net.rimoto.intlphoneinput.IntlPhoneInput;
 
@@ -143,11 +143,11 @@ public class LoginSignup extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             new Thread(new Runnable() {
                                 public void run() {
-                                    User.initialize(mAuth.getCurrentUser());
+                                    UserInterface.initialize(mAuth.getCurrentUser());
                                     // Wait until the user data has loaded before navigating to home screen.
-                                    while(!User.isUserDataLoadedFromServer()) {}
+                                    while(!UserInterface.isInitialized()) {}
                                     Intent nextPage;
-                                    if(User.isNewUser())
+                                    if(UserInterface.isNewUser())
                                         nextPage = new Intent(LoginSignup.this, SetupProfile.class);
                                     else
                                         nextPage = new Intent(LoginSignup.this, Home.class);
