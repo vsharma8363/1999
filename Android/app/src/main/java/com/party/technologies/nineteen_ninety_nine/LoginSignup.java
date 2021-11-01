@@ -5,8 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.telephony.PhoneNumberFormattingTextWatcher;
-import android.telephony.PhoneNumberUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -21,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.party.technologies.nineteen_ninety_nine.data.User;
 
 import net.rimoto.intlphoneinput.IntlPhoneInput;
 
@@ -144,11 +143,11 @@ public class LoginSignup extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             new Thread(new Runnable() {
                                 public void run() {
-                                    UserStorage.initialize(mAuth.getCurrentUser());
+                                    User.initialize(mAuth.getCurrentUser());
                                     // Wait until the user data has loaded before navigating to home screen.
-                                    while(!UserStorage.isUserDataLoadedFromServer()) {}
+                                    while(!User.isUserDataLoadedFromServer()) {}
                                     Intent nextPage;
-                                    if(UserStorage.isNewUser())
+                                    if(User.isNewUser())
                                         nextPage = new Intent(LoginSignup.this, SetupProfile.class);
                                     else
                                         nextPage = new Intent(LoginSignup.this, Home.class);

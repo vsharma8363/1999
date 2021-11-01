@@ -1,6 +1,4 @@
-package com.party.technologies.nineteen_ninety_nine;
-
-import android.graphics.Color;
+package com.party.technologies.nineteen_ninety_nine.data;
 
 import androidx.annotation.Nullable;
 
@@ -12,23 +10,20 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UserStorage {
+public class User {
 
     private static FirebaseUser fbUser;
     private static FirebaseFirestore db;
     private static DocumentReference userRef;
     private static Map<String, Object> userData;
     private static boolean userDataLoadedFromServer;
-    private static boolean partyDataLoadedFromServer;
 
     public static void initialize(FirebaseUser firebaseUser) {
         userDataLoadedFromServer = false;
-        partyDataLoadedFromServer = false;
         fbUser = firebaseUser;
         db = FirebaseFirestore.getInstance();
         userRef = db.collection("users").document(fbUser.getUid());
@@ -59,10 +54,6 @@ public class UserStorage {
 
     public static boolean isUserDataLoadedFromServer() {
         return userDataLoadedFromServer;
-    }
-
-    public static boolean isPartyDataLoadedFromServer() {
-        return partyDataLoadedFromServer;
     }
 
     public static boolean isNewUser() {
@@ -124,5 +115,9 @@ public class UserStorage {
 
     public static double getMileRange() {
         return Double.parseDouble(userData.get("mile_range").toString());
+    }
+
+    public static String getUserID() {
+        return fbUser.getUid();
     }
 }

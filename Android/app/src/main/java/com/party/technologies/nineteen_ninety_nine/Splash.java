@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.party.technologies.nineteen_ninety_nine.data.User;
 
 public class Splash extends Activity {
 
@@ -22,10 +23,10 @@ public class Splash extends Activity {
             public void run(){
                 if(currentUser != null) {
                     // Some user is signed in.
-                    UserStorage.initialize(currentUser);
+                    User.initialize(currentUser);
                     // Wait until the user data has loaded before navigating to home screen.
-                    while(!UserStorage.isUserDataLoadedFromServer()) {}
-                    if(UserStorage.isNewUser())
+                    while(!User.isUserDataLoadedFromServer()) {}
+                    if(User.isNewUser())
                         nextPage = new Intent(Splash.this, SetupProfile.class);
                     else
                         nextPage = new Intent(Splash.this, Home.class);

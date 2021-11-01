@@ -2,7 +2,6 @@ package com.party.technologies.nineteen_ninety_nine;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -10,8 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import com.party.technologies.nineteen_ninety_nine.data.User;
 
 public class SetupProfile extends AppCompatActivity {
 
@@ -31,10 +29,10 @@ public class SetupProfile extends AppCompatActivity {
         bioView = (TextView)findViewById(R.id.bio_textview);
         bio = (EditText)findViewById(R.id.bio);
         // If user is editing a profile already setup, populate screen with data.
-        if(!UserStorage.isNewUser()) {
-            fullName.setText(UserStorage.getFullName());
-            email.setText(UserStorage.getEmail());
-            bio.setText(UserStorage.getBio());
+        if(!User.isNewUser()) {
+            fullName.setText(User.getFullName());
+            email.setText(User.getEmail());
+            bio.setText(User.getBio());
         }
     }
 
@@ -52,10 +50,10 @@ public class SetupProfile extends AppCompatActivity {
             bioView.setTextColor(Color.RED);
         }
         else {
-            UserStorage.setFullName(fullName.getText().toString());
-            UserStorage.setEmail(email.getText().toString());
-            UserStorage.setBio(bio.getText().toString());
-            UserStorage.resetLoginTime();
+            User.setFullName(fullName.getText().toString());
+            User.setEmail(email.getText().toString());
+            User.setBio(bio.getText().toString());
+            User.resetLoginTime();
             startActivity(new Intent(SetupProfile.this, Home.class));
         }
     }
