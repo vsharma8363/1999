@@ -1,12 +1,13 @@
-package com.party.technologies.nineteen_ninety_nine;
+package com.party.technologies.nineteen_ninety_nine.ui;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.party.technologies.nineteen_ninety_nine.data.PartyInterface;
-import com.party.technologies.nineteen_ninety_nine.data.UserInterface;
+import com.party.technologies.nineteen_ninety_nine.R;
+import com.party.technologies.nineteen_ninety_nine.data.party.PartyInterface;
+import com.party.technologies.nineteen_ninety_nine.data.user.UserInterface;
 
 public class Splash extends Activity {
 

@@ -15,16 +15,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.1999">
         <activity
-            android:name=".SetupProfile"
+            android:name=".ui.SetupProfile"
             android:exported="false" />
         <activity
-            android:name=".LoginSignup"
+            android:name=".ui.LoginSignup"
             android:exported="false" />
         <activity
-            android:name=".Home"
+            android:name=".ui.Home"
             android:exported="false" />
         <activity
-            android:name=".Splash"
+            android:name=".ui.Splash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,21 +1,15 @@
-package com.party.technologies.nineteen_ninety_nine;
+package com.party.technologies.nineteen_ninety_nine.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.party.technologies.nineteen_ninety_nine.data.Party;
-import com.party.technologies.nineteen_ninety_nine.data.PartyInterface;
-import com.party.technologies.nineteen_ninety_nine.data.User;
-import com.party.technologies.nineteen_ninety_nine.data.UserInterface;
-
-import java.util.ArrayList;
+import com.party.technologies.nineteen_ninety_nine.R;
+import com.party.technologies.nineteen_ninety_nine.data.user.User;
+import com.party.technologies.nineteen_ninety_nine.data.user.UserInterface;
 
 public class Home extends AppCompatActivity {
 

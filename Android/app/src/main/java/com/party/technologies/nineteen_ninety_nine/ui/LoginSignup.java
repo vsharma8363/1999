@@ -1,4 +1,4 @@
-package com.party.technologies.nineteen_ninety_nine;
+package com.party.technologies.nineteen_ninety_nine.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,7 +19,8 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
-import com.party.technologies.nineteen_ninety_nine.data.UserInterface;
+import com.party.technologies.nineteen_ninety_nine.R;
+import com.party.technologies.nineteen_ninety_nine.data.user.UserInterface;
 
 import net.rimoto.intlphoneinput.IntlPhoneInput;
 

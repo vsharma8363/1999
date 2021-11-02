@@ -1,40 +1,39 @@
-package com.party.technologies.nineteen_ninety_nine.data;
+package com.party.technologies.nineteen_ninety_nine.data.party;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.party.technologies.nineteen_ninety_nine.data.user.UserInterface;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class PartyInterface {
 
-    // The maximum number of miles range possible for any user.
-    private static final double MAXIMUM_PARTIES_RADIUS_MILES = 100.0;
     private static ArrayList<Party> allParties;
     private static CollectionReference partyCollection;
     private static boolean finishedInit;
 
+    /**
+     * Begins initialization process that activates a listener for the party database.
+     * Information from the party database will be updated in real time via Firebase.
+     */
     public static void initialize() {
         finishedInit = false;
         partyCollection = FirebaseFirestore.getInstance().collection("parties");
-        launchPartyDataListener();
+        launchBackgroundUpdater();
     }
 
-    private static void launchPartyDataListener() {
+    /**
+     * Snapshot listener that will update allParties variable with a list of all
+     * parties taking place when the database detects a change (add/remove/update).
+     */
+    private static void launchBackgroundUpdater() {
         partyCollection
                 // Here we can limit the amount of parties we are updating.
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -54,24 +53,41 @@ public class PartyInterface {
         return finishedInit;
     }
 
-    // Returns party ID
+    /**
+     * Publishes a party to the party database.
+     * @param party A party object that the user wishes to publish to database.
+     * @return ID of party in string format.
+     */
     public static String publishParty(Party party) {
         String partyID = generatePartyID();
-        updateParty(partyID, party);
+        overwriteParty(partyID, party);
         return partyID;
     }
 
-    public static void updateParty(String partyID, Party party) {
+    /**
+     * Overwrites an existing party in the database with the corresponding partyID.
+     * @param party A party object that the user wishes to overwrite.
+     * @return ID of party in string format.
+     */
+    public static String overwriteParty(String partyID, Party party) {
         DocumentReference partyRef = partyCollection.document(partyID);
         party.setPartyID(partyID);
         partyRef.set(party.getHashMap());
+        return partyID;
     }
 
+    /**
+     * @return A random party ID containing the current users UID.
+     */
     private static String generatePartyID() {
         return UserInterface.getCurrentUserUID() + "_" + System.currentTimeMillis();
     }
 
-    // Run this in a thread to be sure there is no program crash.
+    /**
+     * Returns an ArrayList of all parties that are hosted by a host with the UID.
+     * @param hostUID A UID to search for.
+     * @return ArrayList of all parties that were created by host.
+     */
     public static ArrayList<Party> getPartiesByHost(String hostUID) {
         ArrayList<Party> output = new ArrayList<Party>();
         for(Party p:allParties) {

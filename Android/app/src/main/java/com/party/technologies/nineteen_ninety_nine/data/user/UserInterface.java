@@ -1,4 +1,4 @@
-package com.party.technologies.nineteen_ninety_nine.data;
+package com.party.technologies.nineteen_ninety_nine.data.user;
 
 import androidx.annotation.Nullable;
 
@@ -10,10 +10,6 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-
 public class UserInterface {
 
     private static FirebaseUser fbUser;
@@ -24,12 +20,15 @@ public class UserInterface {
     public static void initialize(FirebaseUser firebaseUser) {
         isInitializationFinished = false;
         fbUser = firebaseUser;
-        userRef = FirebaseFirestore.getInstance().collection("users").document(fbUser.getUid());
-        launchUserDataListener();
+        userRef = FirebaseFirestore
+                .getInstance()
+                .collection("users")
+                .document(fbUser.getUid());
+        launchBackgroundUpdater();
     }
 
     /**Updates user data in the background using snapshots (Call once and forget).**/
-    private static void launchUserDataListener() {
+    private static void launchBackgroundUpdater() {
         userRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot snapshot,

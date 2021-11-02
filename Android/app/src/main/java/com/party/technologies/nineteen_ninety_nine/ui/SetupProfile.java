@@ -1,4 +1,4 @@
-package com.party.technologies.nineteen_ninety_nine;
+package com.party.technologies.nineteen_ninety_nine.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,8 +9,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.party.technologies.nineteen_ninety_nine.data.User;
-import com.party.technologies.nineteen_ninety_nine.data.UserInterface;
+import com.party.technologies.nineteen_ninety_nine.R;
+import com.party.technologies.nineteen_ninety_nine.data.user.User;
+import com.party.technologies.nineteen_ninety_nine.data.user.UserInterface;
 
 public class SetupProfile extends AppCompatActivity {
 

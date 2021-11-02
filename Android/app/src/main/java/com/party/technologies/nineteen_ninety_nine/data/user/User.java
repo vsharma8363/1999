@@ -1,4 +1,4 @@
-package com.party.technologies.nineteen_ninety_nine.data;
+package com.party.technologies.nineteen_ninety_nine.data.user;
 
 public class User {
 
