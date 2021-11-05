@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.party.technologies.nineteen_ninety_nine.R;
 import com.party.technologies.nineteen_ninety_nine.data.user.User;
 import com.party.technologies.nineteen_ninety_nine.data.user.UserInterface;
+import com.party.technologies.nineteen_ninety_nine.ui.fragments.Home;
 
 public class SetupProfile extends AppCompatActivity {
 
