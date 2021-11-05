@@ -73,6 +73,7 @@ public class PartyInterface {
         DocumentReference partyRef = partyCollection.document(partyID);
         party.setPartyID(partyID);
         partyRef.set(party.getHashMap());
+        allParties.add(party);
         return partyID;
     }
 

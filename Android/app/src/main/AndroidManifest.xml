@@ -21,7 +21,7 @@
             android:name=".ui.LoginSignup"
             android:exported="false" />
         <activity
-            android:name=".ui.Home"
+            android:name=".ui.fragments.Home"
             android:exported="false" />
         <activity
             android:name=".ui.Splash"
