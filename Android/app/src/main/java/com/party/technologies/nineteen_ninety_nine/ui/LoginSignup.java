@@ -21,7 +21,6 @@ import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.party.technologies.nineteen_ninety_nine.R;
 import com.party.technologies.nineteen_ninety_nine.data.user.UserInterface;
-import com.party.technologies.nineteen_ninety_nine.ui.fragments.Home;
 
 import net.rimoto.intlphoneinput.IntlPhoneInput;
 

@@ -15,13 +15,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.1999">
         <activity
+            android:name=".ui.pages.Profile"
+            android:exported="false" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCfp0H-8PsRVYbvxnF9qlgR_vLQYOcZgZI" />
+
+        <activity
             android:name=".ui.SetupProfile"
             android:exported="false" />
         <activity
             android:name=".ui.LoginSignup"
             android:exported="false" />
         <activity
-            android:name=".ui.fragments.Home"
+            android:name=".ui.Home"
             android:exported="false" />
         <activity
             android:name=".ui.Splash"
