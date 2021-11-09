@@ -13,6 +13,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.party.technologies.nineteen_ninety_nine.R;
+import com.party.technologies.nineteen_ninety_nine.ui.pages.Hosting;
 import com.party.technologies.nineteen_ninety_nine.ui.pages.Profile;
 
 import android.content.Intent;
@@ -34,6 +35,14 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), Profile.class));
+            }
+        });
+        // Define hosting button logic.
+        Button hosting = findViewById(R.id.hosting_button);
+        hosting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), Hosting.class));
             }
         });
 
