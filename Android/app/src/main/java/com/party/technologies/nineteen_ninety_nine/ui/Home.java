@@ -15,6 +15,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.party.technologies.nineteen_ninety_nine.R;
 import com.party.technologies.nineteen_ninety_nine.ui.pages.Hosting;
 import com.party.technologies.nineteen_ninety_nine.ui.pages.Profile;
+import com.party.technologies.nineteen_ninety_nine.ui.pages.Settings;
 
 import android.content.Intent;
 import android.content.res.Resources;
@@ -43,6 +44,14 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), Hosting.class));
+            }
+        });
+        // Define settings button logic.
+        Button settings = findViewById(R.id.settings_button);
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), Settings.class));
             }
         });
 
