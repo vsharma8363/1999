@@ -23,7 +23,6 @@
             android:ems="10"
             android:hint="+1 (202) 456-1111"
             android:inputType="phone">
-
         </net.rimoto.intlphoneinput.IntlPhoneInput>
 
         <Button
