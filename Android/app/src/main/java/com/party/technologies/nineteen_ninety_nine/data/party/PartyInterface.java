@@ -85,17 +85,16 @@ public class PartyInterface {
     }
 
     /**
-     * Returns an ArrayList of all parties that are hosted by a host with the UID.
+     * Returns a Party object hosted by a host with the UID.
      * @param hostUID A UID to search for.
-     * @return ArrayList of all parties that were created by host.
+     * @return Party object of party hosted by the host. (null if no party is being hosted)
      */
-    public static ArrayList<Party> getPartiesByHost(String hostUID) {
-        ArrayList<Party> output = new ArrayList<Party>();
-        for(Party p:allParties) {
-            if(p.getHostID().equals(hostUID))
-                output.add(p);
+    public static Party getPartyByHost(String hostUID) {
+        for(Party party:allParties) {
+            if(party.getHostID().equals(hostUID))
+                return party;
         }
-        return output;
+        return null;
     }
 
     /**Returns parties located in the radius (miles)**/
