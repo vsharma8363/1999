@@ -9,6 +9,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -72,10 +73,40 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
         } catch (Resources.NotFoundException e) {
             Log.e(TAG, "Can't find style. Error: ", e);
         }
-        LatLng sydney = new LatLng(40.730610, -73.935242);
+        // Populate map with data
+        LatLng Fidi = new LatLng(40.7077, -74.0083);
         googleMap.addMarker(new MarkerOptions()
-                .position(sydney)
-                .title("Marker in Sydney"));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+                .position(Fidi)
+                .title("Marker in Fidi"));
+        LatLng WSP = new LatLng(40.7309, -73.9973);
+        googleMap.addMarker(new MarkerOptions()
+                .position(WSP)
+                .title("Party in WSP"))
+                .setSnippet("We will have buttons and other \nstuff here. A fun view to see party info.");
+        LatLng Soho = new LatLng(40.7246, -74.0019);
+        googleMap.addMarker(new MarkerOptions()
+                .position(Soho)
+                .title("Marker in Fidi"));
+        LatLng hellsKitchen = new LatLng(40.7638, -73.9918);
+        googleMap.addMarker(new MarkerOptions()
+                .position(hellsKitchen)
+                .title("Marker in Fidi"));
+
+        LatLng random1 = new LatLng(40.732607, -74.008018);
+        googleMap.addMarker(new MarkerOptions()
+                .position(random1)
+                .title("Marker in Fidi"));
+
+        LatLng random2 = new LatLng(41.716938, -73.989649);
+        googleMap.addMarker(new MarkerOptions()
+                .position(random2)
+                .title("Marker in Fidi"));
+
+        LatLng random3 = new LatLng(40.742986, -73.977652);
+        googleMap.addMarker(new MarkerOptions()
+                .position(random3)
+                .title("Marker in Fidi"));
+        // [START_EXCLUDE silent]
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(WSP, 16));
     }
 }

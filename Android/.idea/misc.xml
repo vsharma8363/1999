@@ -18,6 +18,7 @@
         <entry key="app/src/main/res/layout/activity_test.xml" value="0.11043566362715299" />
         <entry key="app/src/main/res/layout/activity_upcoming.xml" value="0.16458333333333333" />
         <entry key="app/src/main/res/layout/activity_verify_phone.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_create_edit_party.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_create_party.xml" value="0.15364583333333334" />
         <entry key="app/src/main/res/layout/fragment_hosting.xml" value="0.11474164133738601" />
         <entry key="app/src/main/res/layout/fragment_hosting_new_party.xml" value="0.15364583333333334" />
