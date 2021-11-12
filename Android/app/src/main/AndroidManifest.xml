@@ -15,10 +15,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.1999">
         <activity
+            android:name=".ui.ViewParty"
+            android:exported="true" />
+        <activity
             android:name=".ui.pages.Settings"
             android:exported="false" />
         <activity
-            android:name=".ui.pages.Hosting"
+            android:name=".ui.hosting.HostingActivity"
             android:exported="false" />
         <activity
             android:name=".ui.pages.Profile"

@@ -97,6 +97,28 @@ public class PartyInterface {
         return null;
     }
 
+    public static Party getPartyByID(String partyID) {
+        for(Party party:allParties) {
+            if(party.getPartyID().equals(partyID))
+                return party;
+        }
+        return null;
+    }
+
+    public static void deleteParty(String partyID) {
+        for(Party party:allParties) {
+            if(party.getPartyID().equals(partyID)) {
+                allParties.remove(party);
+                break;
+            }
+        }
+        partyCollection.document(partyID).delete();
+    }
+
+    public static ArrayList<Party> getAllParties() {
+        return allParties;
+    }
+
     /**Returns parties located in the radius (miles)**/
     public static ArrayList<Party> getPartiesInRadius(double longitude, double latitude, double radiusMiles) {
         return null;

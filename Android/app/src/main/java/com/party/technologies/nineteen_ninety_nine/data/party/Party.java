@@ -13,7 +13,10 @@ public class Party {
         attributes.put("partyName", name);
         attributes.put("partyDescription", description);
         attributes.put("address", address);
-        attributes.put("apartment_unit", apartmentUnit);
+        if(apartmentUnit == null)
+            attributes.put("apartment_unit", "None");
+        else
+            attributes.put("apartment_unit", apartmentUnit);
         attributes.put("longitude", longitude);
         attributes.put("latitude", latitude);
     }
