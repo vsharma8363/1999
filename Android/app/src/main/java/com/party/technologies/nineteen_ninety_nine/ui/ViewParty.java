@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.party.technologies.nineteen_ninety_nine.R;
 import com.party.technologies.nineteen_ninety_nine.data.party.Party;
 import com.party.technologies.nineteen_ninety_nine.data.party.PartyInterface;
+import com.party.technologies.nineteen_ninety_nine.data.user.UserInterface;
 
 public class ViewParty extends AppCompatActivity {
 
@@ -35,7 +36,9 @@ public class ViewParty extends AppCompatActivity {
         findViewById(R.id.request_invite).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                party.addRequestedInvite(UserInterface.getCurrentUserUID());
+                PartyInterface.updateParty(party);
+                startActivity(new Intent(ViewParty.this, Home.class));
             }
         });
         partyName.setText(party.getPartyName());

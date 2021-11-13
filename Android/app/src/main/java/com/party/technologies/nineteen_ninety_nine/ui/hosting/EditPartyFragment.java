@@ -104,7 +104,8 @@ public class EditPartyFragment extends Fragment {
 
                     if (currentParty != null) {
                         // if user is editing a party, overwrite the existing party
-                        PartyInterface.overwriteParty(currentParty.getPartyID(), newParty);
+                        newParty.setPartyID(currentParty.getPartyID());
+                        PartyInterface.updateParty(newParty);
                     }
                     else {
                         // if this is a new party, ask the user to confirm with a popup dialog

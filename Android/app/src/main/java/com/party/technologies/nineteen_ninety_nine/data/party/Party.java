@@ -1,5 +1,8 @@
 package com.party.technologies.nineteen_ninety_nine.data.party;
 
+import android.widget.Toast;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -83,6 +86,30 @@ public class Party {
 
     public void setLatitude(double latitude) {
         attributes.put("latitude", latitude);
+    }
+
+    public ArrayList<String> getRequestedInvites() {
+        ArrayList<String> requestedInviteList = new ArrayList<String>();
+        if (attributes.containsKey("invite_requested")) {
+            String guestString = (String)attributes.get("invite_requested");
+            for (String guestUID:guestString.split(",")) {
+                requestedInviteList.add(guestUID);
+            }
+        }
+        return requestedInviteList;
+    }
+
+    public boolean addRequestedInvite(String UID) {
+        if (!attributes.containsKey("invite_requested") || ((String)attributes.get("invite_requested")).length() <= 0)
+            attributes.put("invite_requested", UID);
+        else {
+            String oldRequestsList = (String)attributes.get("invite_requested");
+            if (oldRequestsList.contains(UID))
+                return false;
+            String newRequestsList = oldRequestsList + "," + UID;
+            attributes.put("invite_requested", newRequestsList);
+        }
+        return true;
     }
 
     public Map<String, Object> getHashMap() {

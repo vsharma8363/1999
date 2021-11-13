@@ -58,23 +58,28 @@ public class PartyInterface {
      * @param party A party object that the user wishes to publish to database.
      * @return ID of party in string format.
      */
-    public static String publishParty(Party party) {
-        String partyID = generatePartyID();
-        overwriteParty(partyID, party);
-        return partyID;
+    public static void publishParty(Party party) {
+        party.setPartyID(generatePartyID());
+        updateParty(party);
     }
 
     /**
      * Overwrites an existing party in the database with the corresponding partyID.
-     * @param party A party object that the user wishes to overwrite.
+     * @param updatedParty A party object that the user wishes to overwrite.
      * @return ID of party in string format.
      */
-    public static String overwriteParty(String partyID, Party party) {
-        DocumentReference partyRef = partyCollection.document(partyID);
-        party.setPartyID(partyID);
-        partyRef.set(party.getHashMap());
-        allParties.add(party);
-        return partyID;
+    public static void updateParty(Party updatedParty) {
+        // Overwrite party object from local storage.
+        for(Party party:allParties) {
+            if(party.getPartyID().equals(updatedParty.getPartyID())) {
+                allParties.remove(party);
+                allParties.add(updatedParty);
+                break;
+            }
+        }
+        // Overwrite party data on server.
+        DocumentReference partyRef = partyCollection.document(updatedParty.getPartyID());
+        partyRef.set(updatedParty.getHashMap());
     }
 
     /**
@@ -82,6 +87,15 @@ public class PartyInterface {
      */
     private static String generatePartyID() {
         return UserInterface.getCurrentUserUID() + "_" + System.currentTimeMillis();
+    }
+
+    public static ArrayList<Party> getUpcomingParties(String UID) {
+        ArrayList<Party> upcomingParties = new ArrayList<Party>();
+        for(Party party:allParties) {
+            if(party.getRequestedInvites().contains(UID))
+                upcomingParties.add(party);
+        }
+        return upcomingParties;
     }
 
     /**
@@ -106,12 +120,14 @@ public class PartyInterface {
     }
 
     public static void deleteParty(String partyID) {
+        // Remove party from local storage, to keep illusion of instantaneous server updates.
         for(Party party:allParties) {
             if(party.getPartyID().equals(partyID)) {
                 allParties.remove(party);
                 break;
             }
         }
+        // Push a request to delete the party from server storage.
         partyCollection.document(partyID).delete();
     }
 
@@ -123,5 +139,4 @@ public class PartyInterface {
     public static ArrayList<Party> getPartiesInRadius(double longitude, double latitude, double radiusMiles) {
         return null;
     }
-
 }

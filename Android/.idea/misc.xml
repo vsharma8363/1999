@@ -24,6 +24,7 @@
         <entry key="app/src/main/res/layout/fragment_hosting.xml" value="0.11474164133738601" />
         <entry key="app/src/main/res/layout/fragment_hosting_already.xml" value="0.22083333333333333" />
         <entry key="app/src/main/res/layout/fragment_hosting_new_party.xml" value="0.15364583333333334" />
+        <entry key="app/src/main/res/layout/fragment_list_upcoming_list.xml" value="0.1828125" />
         <entry key="app/src/main/res/layout/fragment_map.xml" value="0.11474164133738601" />
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.12158054711246201" />
         <entry key="app/src/main/res/layout/fragment_upcoming.xml" value="0.11096014492753623" />
