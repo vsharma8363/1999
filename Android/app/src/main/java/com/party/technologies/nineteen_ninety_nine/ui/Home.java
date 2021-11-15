@@ -5,8 +5,6 @@ import static android.content.ContentValues.TAG;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -17,14 +15,14 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.material.shape.MarkerEdgeTreatment;
 import com.party.technologies.nineteen_ninety_nine.R;
 import com.party.technologies.nineteen_ninety_nine.data.party.Party;
 import com.party.technologies.nineteen_ninety_nine.data.party.PartyInterface;
 import com.party.technologies.nineteen_ninety_nine.data.user.UserInterface;
-import com.party.technologies.nineteen_ninety_nine.ui.hosting.HostingActivity;
+import com.party.technologies.nineteen_ninety_nine.ui.hosting.HostingParentView;
 import com.party.technologies.nineteen_ninety_nine.ui.pages.Profile;
 import com.party.technologies.nineteen_ninety_nine.ui.pages.Settings;
+import com.party.technologies.nineteen_ninety_nine.ui.upcoming.UpcomingActivity;
 
 import android.content.Intent;
 import android.content.res.Resources;
@@ -62,7 +60,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
         hosting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), HostingActivity.class));
+                startActivity(new Intent(getApplicationContext(), HostingParentView.class));
             }
         });
         // Define settings button logic.
@@ -71,6 +69,14 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), Settings.class));
+            }
+        });
+        // Define settings button logic.
+        Button upcoming = findViewById(R.id.upcoming_button);
+        upcoming.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), UpcomingActivity.class));
             }
         });
 

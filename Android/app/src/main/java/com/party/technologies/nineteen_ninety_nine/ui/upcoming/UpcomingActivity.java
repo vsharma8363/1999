@@ -1,13 +1,18 @@
 package com.party.technologies.nineteen_ninety_nine.ui.upcoming;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import com.party.technologies.nineteen_ninety_nine.R;
+import com.party.technologies.nineteen_ninety_nine.data.party.PartyInterface;
+import com.party.technologies.nineteen_ninety_nine.data.user.UserInterface;
 import com.party.technologies.nineteen_ninety_nine.ui.Home;
+import com.party.technologies.nineteen_ninety_nine.ui.hosting.ConfirmHostFragment;
+import com.party.technologies.nineteen_ninety_nine.ui.hosting.HostViewFragment;
 
 public class UpcomingActivity extends AppCompatActivity {
 
@@ -23,5 +28,8 @@ public class UpcomingActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), Home.class));
             }
         });
+
+        getSupportFragmentManager().beginTransaction().replace(
+                R.id.upcoming_fragment_view, new ViewUpcomingFragment()).commit();
     }
 }

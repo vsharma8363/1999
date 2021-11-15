@@ -44,7 +44,10 @@ public class HostViewFragment extends Fragment {
         // Setup fragment manager.
         FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
 
-        // Setup edit party button functionality.
+        TextView name = view.findViewById(R.id.hosting_party_name);
+        TextView description = view.findViewById(R.id.hosting_party_description);
+        TextView address = view.findViewById(R.id.hosting_party_address);
+
         view.findViewById(R.id.hosting_edit_party).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,20 +55,14 @@ public class HostViewFragment extends Fragment {
             }
         });
 
-        TextView name = view.findViewById(R.id.hosting_party_name);
-        TextView description = view.findViewById(R.id.hosting_party_description);
-        TextView address = view.findViewById(R.id.hosting_party_address);
-
         Party hostingParty = PartyInterface.getPartyByHost(UserInterface.getCurrentUserUID());
         if (hostingParty == null) {
             // You are not supposed to be on this page
-            fragmentTransaction.replace(R.id.hosting_fragment_view, new ChooseToHostFragment()).commit();
+            fragmentTransaction.replace(R.id.hosting_fragment_view, new ConfirmHostFragment()).commit();
         }
-        else {
-            name.setText(hostingParty.getPartyName());
-            description.setText(hostingParty.getPartyDescription());
-            address.setText(hostingParty.getAddress());
-        }
+        name.setText(hostingParty.getPartyName());
+        description.setText(hostingParty.getPartyDescription());
+        address.setText(hostingParty.getAddress());
 
         return view;
     }

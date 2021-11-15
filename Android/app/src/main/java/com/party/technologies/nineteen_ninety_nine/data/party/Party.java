@@ -1,6 +1,9 @@
 package com.party.technologies.nineteen_ninety_nine.data.party;
 
+import android.os.Build;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,6 +12,41 @@ import java.util.Map;
 public class Party {
 
     private Map<String, Object> attributes;
+    private ArrayList<String> guestsApproved;
+
+    public void setGuestsApproved(ArrayList<String> guestsApproved) {
+        this.guestsApproved = guestsApproved;
+    }
+
+    public void setGuestsPending(ArrayList<String> guestsPending) {
+        this.guestsPending = guestsPending;
+    }
+
+    public void setGuestsDenied(ArrayList<String> guestsDenied) {
+        this.guestsDenied = guestsDenied;
+    }
+
+    public ArrayList<String> getGuestsApproved() {
+        return guestsApproved;
+    }
+
+    public ArrayList<String> getGuestsPending() {
+        return guestsPending;
+    }
+
+    public ArrayList<String> getGuestsDenied() {
+        return guestsDenied;
+    }
+
+    private ArrayList<String> guestsPending;
+    private ArrayList<String> guestsDenied;
+
+    public Party() {
+        attributes = new HashMap<String, Object>();
+        guestsApproved = new ArrayList<String>();
+        guestsPending = new ArrayList<String>();
+        guestsDenied = new ArrayList<String>();
+    }
 
     public Party(String hostID, String name, String description, String address, String apartmentUnit, double longitude, double latitude) {
         attributes = new HashMap<String, Object>();
@@ -22,14 +60,16 @@ public class Party {
             attributes.put("apartment_unit", apartmentUnit);
         attributes.put("longitude", longitude);
         attributes.put("latitude", latitude);
-    }
-
-    public Party(Map<String, Object> serialized) {
-        this.attributes = serialized;
+        guestsApproved = new ArrayList<String>();
+        guestsPending = new ArrayList<String>();
+        guestsDenied = new ArrayList<String>();
     }
 
     public String getHostID() {
         return (String)this.attributes.get("hostID");
+    }
+    public void setHostID(String hostID) {
+        this.attributes.put("hostID", hostID);
     }
 
     public String getPartyName() {
@@ -88,31 +128,29 @@ public class Party {
         attributes.put("latitude", latitude);
     }
 
-    public ArrayList<String> getRequestedInvites() {
-        ArrayList<String> requestedInviteList = new ArrayList<String>();
-        if (attributes.containsKey("invite_requested")) {
-            String guestString = (String)attributes.get("invite_requested");
-            for (String guestUID:guestString.split(",")) {
-                requestedInviteList.add(guestUID);
-            }
-        }
-        return requestedInviteList;
+
+    public void addApprovedGuest(String UID) {
+        if(this.guestsPending.contains(UID))
+            this.guestsPending.remove(UID);
+        if(this.guestsDenied.contains(UID))
+            this.guestsDenied.remove(UID);
+        this.guestsApproved.add(UID);
     }
 
-    public boolean addRequestedInvite(String UID) {
-        if (!attributes.containsKey("invite_requested") || ((String)attributes.get("invite_requested")).length() <= 0)
-            attributes.put("invite_requested", UID);
-        else {
-            String oldRequestsList = (String)attributes.get("invite_requested");
-            if (oldRequestsList.contains(UID))
-                return false;
-            String newRequestsList = oldRequestsList + "," + UID;
-            attributes.put("invite_requested", newRequestsList);
-        }
-        return true;
+
+    public void addPendingGuest(String UID) {
+        if(this.guestsDenied.contains(UID))
+            this.guestsDenied.remove(UID);
+        if(this.guestsApproved.contains(UID))
+            this.guestsApproved.remove(UID);
+        this.guestsPending.add(UID);
     }
 
-    public Map<String, Object> getHashMap() {
-        return this.attributes;
+    public void addDeniedGuest(String UID) {
+        if(this.guestsPending.contains(UID))
+            this.guestsPending.remove(UID);
+        if(this.guestsApproved.contains(UID))
+            this.guestsApproved.remove(UID);
+        this.guestsDenied.add(UID);
     }
 }

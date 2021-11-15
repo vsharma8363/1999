@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.hosting.HostingActivity">
+    tools:context=".ui.hosting.HostingParentView">
 
     <LinearLayout
         android:id="@+id/hosting_layout"

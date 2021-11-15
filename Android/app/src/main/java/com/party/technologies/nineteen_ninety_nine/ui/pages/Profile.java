@@ -27,6 +27,8 @@ public class Profile extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), Home.class));
             }
         });
+        // Button to allow user to connect instagram
+
         // Show user data.
         User user = UserInterface.getCurrentUser();
         TextView fullName = findViewById(R.id.full_name);

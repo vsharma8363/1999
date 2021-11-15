@@ -1,28 +1,27 @@
 package com.party.technologies.nineteen_ninety_nine.ui.hosting;
 
 import android.content.Context;
-import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.fragment.app.Fragment;
-
 import com.google.android.gms.maps.model.LatLng;
 import com.party.technologies.nineteen_ninety_nine.R;
 import com.party.technologies.nineteen_ninety_nine.data.party.Party;
 import com.party.technologies.nineteen_ninety_nine.data.party.PartyInterface;
 import com.party.technologies.nineteen_ninety_nine.data.user.UserInterface;
-import com.party.technologies.nineteen_ninety_nine.ui.Home;
 
 import java.util.List;
 
-public class EditPartyFragment extends Fragment {
+public class CreatePartyFragment extends Fragment {
 
     private final String MISSING_INFO_MSG = "Please enter a valid ";
     private LatLng address_latlng;
@@ -31,11 +30,11 @@ public class EditPartyFragment extends Fragment {
     private TextView address;
     private TextView apartment_unit;
 
-    public EditPartyFragment() {
+    public CreatePartyFragment() {
     }
 
-    public static EditPartyFragment newInstance() {
-        return new EditPartyFragment();
+    public static CreatePartyFragment newInstance() {
+        return new CreatePartyFragment();
     }
 
     @Override
@@ -47,27 +46,13 @@ public class EditPartyFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_edit_party, container, false);
-
-        Party currentParty = PartyInterface.getPartyByHost(UserInterface.getCurrentUserUID());
-
-        view.findViewById(R.id.delete_party).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PartyInterface.deleteParty(currentParty.getPartyID());
-                startActivity(new Intent(getContext(), Home.class));
-            }
-        });
+        View view = inflater.inflate(R.layout.fragment_create_party, container, false);
 
         // Define all displays
         name = view.findViewById(R.id.party_name);
-        name.setText(currentParty.getPartyName());
         description = view.findViewById(R.id.party_description);
-        description.setText(currentParty.getPartyDescription());
         address = view.findViewById(R.id.party_address);
-        address.setText(currentParty.getAddress());
         apartment_unit = view.findViewById(R.id.suite_unit);
-        apartment_unit.setText(currentParty.getApartment_unit());
 
         // Set submission logic.
         view.findViewById(R.id.done_editing_party).setOnClickListener(new View.OnClickListener() {
@@ -75,16 +60,15 @@ public class EditPartyFragment extends Fragment {
             public void onClick(View v) {
                 address_latlng = getLocationFromAddress(getActivity(), address.getText().toString());
                 if(fieldsAreValid()) {
-                    // Get latest party data
-                    Party updatedParty = PartyInterface.getPartyByHost(UserInterface.getCurrentUserUID());
                     // All information is valid, create a new party object
-                    updatedParty.setPartyName(name.getText().toString());
-                    updatedParty.setPartyDescription(description.getText().toString());
-                    updatedParty.setAddress(address.getText().toString());
-                    updatedParty.setApartment_unit(apartment_unit.getText().toString());
-                    updatedParty.setLongitude(address_latlng.longitude);
-                    updatedParty.setLatitude(address_latlng.latitude);
-                    PartyInterface.updateParty(updatedParty);
+                    Party newParty = new Party(UserInterface.getCurrentUserUID(),
+                            name.getText().toString(),
+                            description.getText().toString(),
+                            address.getText().toString(),
+                            apartment_unit.getText().toString(),
+                            address_latlng.longitude,
+                            address_latlng.latitude);
+                    PartyInterface.publishParty(newParty);
                     getActivity().getSupportFragmentManager().beginTransaction().replace(
                             R.id.hosting_fragment_view, new HostViewFragment()).commit();
                 }

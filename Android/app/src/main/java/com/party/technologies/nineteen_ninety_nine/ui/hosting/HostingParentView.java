@@ -12,7 +12,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class HostingActivity extends AppCompatActivity {
+public class HostingParentView extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +31,7 @@ public class HostingActivity extends AppCompatActivity {
         if (PartyInterface.getPartyByHost(UserInterface.getCurrentUserUID()) == null)
             // If there is no party currently hosted by the user, ask the user if they wish to host
             // a new party.
-            nextFragment = new ChooseToHostFragment();
+            nextFragment = new ConfirmHostFragment();
         else
             // If there is a party currently being hosted, direct them to host view
             nextFragment = new HostViewFragment();

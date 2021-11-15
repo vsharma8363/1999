@@ -10,13 +10,13 @@ import android.view.ViewGroup;
 
 import com.party.technologies.nineteen_ninety_nine.R;
 
-public class ChooseToHostFragment extends Fragment {
+public class ConfirmHostFragment extends Fragment {
 
-    public ChooseToHostFragment() {
+    public ConfirmHostFragment() {
     }
 
-    public static ChooseToHostFragment newInstance() {
-        return new ChooseToHostFragment();
+    public static ConfirmHostFragment newInstance() {
+        return new ConfirmHostFragment();
     }
 
     @Override
@@ -48,6 +48,6 @@ public class ChooseToHostFragment extends Fragment {
 
     private void launchPartyCreatorFragment() {
         getActivity().getSupportFragmentManager().beginTransaction().replace(
-                R.id.hosting_fragment_view, new EditPartyFragment()).commit();
+                R.id.hosting_fragment_view, new CreatePartyFragment()).commit();
     }
 }

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,10 +34,11 @@ public class ViewParty extends AppCompatActivity {
         Party party = PartyInterface.getPartyByID(partyID);
         TextView partyName = findViewById(R.id.viewing_party_name);
         TextView partyDescription = findViewById(R.id.viewing_party_description);
-        findViewById(R.id.request_invite).setOnClickListener(new View.OnClickListener() {
+        Button requestInvite = findViewById(R.id.request_invite);
+        requestInvite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                party.addRequestedInvite(UserInterface.getCurrentUserUID());
+                party.addPendingGuest(UserInterface.getCurrentUserUID());
                 PartyInterface.updateParty(party);
                 startActivity(new Intent(ViewParty.this, Home.class));
             }

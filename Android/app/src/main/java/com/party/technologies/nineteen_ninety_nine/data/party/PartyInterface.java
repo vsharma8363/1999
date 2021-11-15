@@ -1,6 +1,9 @@
 package com.party.technologies.nineteen_ninety_nine.data.party;
 
+import android.os.Build;
+
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -9,6 +12,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.party.technologies.nineteen_ninety_nine.data.user.User;
 import com.party.technologies.nineteen_ninety_nine.data.user.UserInterface;
 
 import java.util.ArrayList;
@@ -42,7 +46,7 @@ public class PartyInterface {
                                         @Nullable FirebaseFirestoreException e) {
                         ArrayList<Party> parties = new ArrayList<Party>();
                         for (QueryDocumentSnapshot doc : value)
-                            parties.add(new Party(doc.getData()));
+                            parties.add(doc.toObject(Party.class));
                         allParties = parties;
                         finishedInit = true;
                     }
@@ -69,17 +73,9 @@ public class PartyInterface {
      * @return ID of party in string format.
      */
     public static void updateParty(Party updatedParty) {
-        // Overwrite party object from local storage.
-        for(Party party:allParties) {
-            if(party.getPartyID().equals(updatedParty.getPartyID())) {
-                allParties.remove(party);
-                allParties.add(updatedParty);
-                break;
-            }
-        }
         // Overwrite party data on server.
         DocumentReference partyRef = partyCollection.document(updatedParty.getPartyID());
-        partyRef.set(updatedParty.getHashMap());
+        partyRef.set(updatedParty);
     }
 
     /**
@@ -92,7 +88,9 @@ public class PartyInterface {
     public static ArrayList<Party> getUpcomingParties(String UID) {
         ArrayList<Party> upcomingParties = new ArrayList<Party>();
         for(Party party:allParties) {
-            if(party.getRequestedInvites().contains(UID))
+            if(party.getGuestsApproved().contains(UID) ||
+                party.getGuestsPending().contains(UID) ||
+                party.getGuestsDenied().contains(UID))
                 upcomingParties.add(party);
         }
         return upcomingParties;
