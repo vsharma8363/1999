@@ -13,6 +13,8 @@ import com.party.technologies.nineteen_ninety_nine.R;
 import com.party.technologies.nineteen_ninety_nine.data.user.User;
 import com.party.technologies.nineteen_ninety_nine.data.user.UserInterface;
 
+import java.util.ArrayList;
+
 public class SetupProfile extends AppCompatActivity {
 
     private TextView fullNameView, emailView, bioView;
@@ -30,13 +32,17 @@ public class SetupProfile extends AppCompatActivity {
         email = (EditText)findViewById(R.id.email);
         bioView = (TextView)findViewById(R.id.bio_textview);
         bio = (EditText)findViewById(R.id.bio);
-        // If user is editing a profile already setup, populate screen with data.
-        if(!UserInterface.isNewUser()) {
-            User currentUser = UserInterface.getCurrentUser();
-            fullName.setText(currentUser.getFullName());
-            email.setText(currentUser.getEmail());
-            bio.setText(currentUser.getBio());
-        }
+        findViewById(R.id.instagram_connection).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ArrayList<String> instagramPictures = new ArrayList<String>();
+                /** TODO(Bea): this onClick method is executed when the
+                 * instagram connection button is clicked, it should direct you
+                 * to an instagram signin, then we need to store all their
+                 * instagram pictures into the arraylist of picture urls above.
+                 * **/
+            }
+        });
     }
 
     public void submitProfile(View v) {
@@ -53,16 +59,14 @@ public class SetupProfile extends AppCompatActivity {
             bioView.setTextColor(Color.RED);
         }
         else {
-            // If user is new, setup a new user profile.
-            if(UserInterface.isNewUser())
-                UserInterface.setupNewUser();
+            /**UserInterface.setupNewUser();
             // Get the current user and update data.
             User currentUser = UserInterface.getCurrentUser();
             currentUser.setFullName(fullName.getText().toString());
             currentUser.setEmail(email.getText().toString());
             currentUser.setBio(bio.getText().toString());
             UserInterface.updateUserData();
-            startActivity(new Intent(SetupProfile.this, Home.class));
+            startActivity(new Intent(SetupProfile.this, Home.class));**/
         }
     }
 }

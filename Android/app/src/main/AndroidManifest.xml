@@ -35,7 +35,7 @@
             android:value="AIzaSyCfp0H-8PsRVYbvxnF9qlgR_vLQYOcZgZI" />
 
         <activity
-            android:name=".ui.SetupProfile"
+            android:name=".ui.Splash"
             android:exported="false" />
         <activity
             android:name=".ui.LoginSignup"
@@ -44,7 +44,7 @@
             android:name=".ui.Home"
             android:exported="false" />
         <activity
-            android:name=".ui.Splash"
+            android:name=".ui.SetupProfile"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
