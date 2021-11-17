@@ -17,6 +17,25 @@ public class UserInterface {
     private static User currentUser;
     private static boolean isInitializationFinished;
 
+    public static String getInstagramToken() {
+        return instagramToken;
+    }
+
+    public static void setInstagramToken(String instagramToken) {
+        UserInterface.instagramToken = instagramToken;
+    }
+
+    public static String getInstagramUID() {
+        return instagramUID;
+    }
+
+    public static void setInstagramUID(String instagramUID) {
+        UserInterface.instagramUID = instagramUID;
+    }
+
+    private static String instagramToken;
+    private static String instagramUID;
+
     public static void initialize(FirebaseUser firebaseUser) {
         isInitializationFinished = false;
         fbUser = firebaseUser;

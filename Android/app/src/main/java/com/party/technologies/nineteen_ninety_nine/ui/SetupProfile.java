@@ -4,10 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebViewClient;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.webkit.WebView;
+
 
 import com.party.technologies.nineteen_ninety_nine.R;
 import com.party.technologies.nineteen_ninety_nine.data.user.User;
@@ -19,6 +23,7 @@ public class SetupProfile extends AppCompatActivity {
 
     private TextView fullNameView, emailView, bioView;
     private EditText fullName, email, bio;
+    private WebView myWebView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +37,7 @@ public class SetupProfile extends AppCompatActivity {
         email = (EditText)findViewById(R.id.email);
         bioView = (TextView)findViewById(R.id.bio_textview);
         bio = (EditText)findViewById(R.id.bio);
+//        myWebView = (WebView)findViewById(R.id.webview);
         findViewById(R.id.instagram_connection).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,6 +47,9 @@ public class SetupProfile extends AppCompatActivity {
                  * to an instagram signin, then we need to store all their
                  * instagram pictures into the arraylist of picture urls above.
                  * **/
+                startActivity(new Intent(SetupProfile.this, InstagramScreen.class));
+
+
             }
         });
     }

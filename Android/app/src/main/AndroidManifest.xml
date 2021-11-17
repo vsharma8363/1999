@@ -43,6 +43,7 @@
         <activity
             android:name=".ui.Home"
             android:exported="false" />
+        <activity android:name=".ui.InstagramScreen" />
         <activity
             android:name=".ui.SetupProfile"
             android:exported="true">
