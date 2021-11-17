@@ -43,14 +43,13 @@ public class ViewUpcomingFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_view_upcoming, container, false);
         // Linear Layout to present all party views
         LinearLayout upcomingView = view.findViewById(R.id.upcoming_list);
-        String currentUID = UserInterface.getCurrentUserUID();
-        for(Party party: PartyInterface.getUpcomingParties(currentUID)) {
-            upcomingView.addView(getPartyView(party, currentUID));
+        for(Party party: PartyInterface.getUpcomingParties(UserInterface.getCurrentUserUID())) {
+            upcomingView.addView(getPartyView(party));
         }
         return view;
     }
 
-    private LinearLayout getPartyView(Party party, String currentUID) {
+    private LinearLayout getPartyView(Party party) {
         // Define overall part element
         LinearLayout partyElement = new LinearLayout(getActivity());
         partyElement.setOrientation(LinearLayout.VERTICAL);
@@ -67,7 +66,7 @@ public class ViewUpcomingFragment extends Fragment {
         // Add data to element
         partyElement.addView(partyTitle);
         partyElement.addView(partyDescription);
-        if(party.getGuestsApproved().contains(currentUID)) {
+        if(party.getGuestsApproved().contains(UserInterface.getCurrentUserUID())) {
             partyElement.setBackgroundColor(Color.GREEN);
             TextView address = new TextView(getActivity());
             address.setTextColor(Color.BLACK);
@@ -75,9 +74,9 @@ public class ViewUpcomingFragment extends Fragment {
             address.setTextSize(18f);
             partyElement.addView(address);
         }
-        else if(party.getGuestsPending().contains(currentUID))
+        else if(party.getGuestsPending().contains(UserInterface.getCurrentUserUID()))
             partyElement.setBackgroundColor(Color.GRAY);
-        else if(party.getGuestsDenied().contains(currentUID))
+        else if(party.getGuestsDenied().contains(UserInterface.getCurrentUserUID()))
             partyElement.setBackgroundColor(Color.RED);
         partyElement.setOnClickListener(new View.OnClickListener() {
             @Override

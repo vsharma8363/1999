@@ -103,7 +103,8 @@ public class PartyInterface {
         for(Party party:allParties) {
             if(party.getGuestsApproved().contains(UID) ||
                 party.getGuestsPending().contains(UID) ||
-                party.getGuestsDenied().contains(UID))
+                party.getGuestsDenied().contains(UID) ||
+                party.getHostID().equals(UID))
                 upcomingParties.add(party);
         }
         return upcomingParties;

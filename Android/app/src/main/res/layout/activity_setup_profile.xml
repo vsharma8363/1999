@@ -59,10 +59,9 @@
             android:inputType="text" />
 
         <Button
-            android:id="@+id/submit"
+            android:id="@+id/setup_profile_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="submitProfile"
             android:text="Submit Changes" />
 
     </LinearLayout>

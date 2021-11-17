@@ -1,4 +1,4 @@
-package com.party.technologies.nineteen_ninety_nine.ui.pages;
+package com.party.technologies.nineteen_ninety_nine.ui.profile;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,8 +12,9 @@ import com.party.technologies.nineteen_ninety_nine.R;
 import com.party.technologies.nineteen_ninety_nine.data.user.User;
 import com.party.technologies.nineteen_ninety_nine.data.user.UserInterface;
 import com.party.technologies.nineteen_ninety_nine.ui.Home;
+import com.party.technologies.nineteen_ninety_nine.ui.upcoming.ViewUpcomingFragment;
 
-public class Profile extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,17 +28,7 @@ public class Profile extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), Home.class));
             }
         });
-        // Button to allow user to connect instagram
-
-        // Show user data.
-        User user = UserInterface.getCurrentUser();
-        TextView fullName = findViewById(R.id.full_name);
-        fullName.setText(user.getFullName() + "\n");
-        TextView phoneNumber = findViewById(R.id.phone_number);
-        phoneNumber.setText(user.getPhoneNumber() + "\n");
-        TextView email = findViewById(R.id.email);
-        email.setText(user.getEmail() + "\n");
-        TextView bio = findViewById(R.id.bio);
-        bio.setText(user.getBio() + "\n");
+        getSupportFragmentManager().beginTransaction().replace(
+                R.id.profile_fragment_view, new ProfileFragment()).commit();
     }
 }

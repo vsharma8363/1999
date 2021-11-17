@@ -27,7 +27,7 @@
             android:name=".ui.hosting.HostingActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.pages.Profile"
+            android:name=".ui.profile.ProfileActivity"
             android:exported="false" />
 
         <meta-data

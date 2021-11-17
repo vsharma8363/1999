@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.pages.Profile">
+    tools:context=".ui.profile.ProfileActivity">
 
     <LinearLayout
         android:id="@+id/profile_layout"
@@ -35,33 +35,11 @@
             android:layout_width="match_parent"
             android:layout_height="50dp" />
 
-        <TextView
-            android:id="@+id/full_name"
+        <androidx.fragment.app.FragmentContainerView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/profile_fragment_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Full Name" />
-
-        <TextView
-            android:id="@+id/phone_number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Phone Number" />
-
-        <TextView
-            android:id="@+id/email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Email" />
-
-        <TextView
-            android:id="@+id/bio"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Biography" />
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 

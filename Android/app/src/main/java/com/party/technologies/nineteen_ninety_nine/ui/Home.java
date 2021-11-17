@@ -20,7 +20,7 @@ import com.party.technologies.nineteen_ninety_nine.data.party.Party;
 import com.party.technologies.nineteen_ninety_nine.data.party.PartyInterface;
 import com.party.technologies.nineteen_ninety_nine.data.user.UserInterface;
 import com.party.technologies.nineteen_ninety_nine.ui.hosting.HostingActivity;
-import com.party.technologies.nineteen_ninety_nine.ui.pages.Profile;
+import com.party.technologies.nineteen_ninety_nine.ui.profile.ProfileActivity;
 import com.party.technologies.nineteen_ninety_nine.ui.pages.Settings;
 import com.party.technologies.nineteen_ninety_nine.ui.upcoming.UpcomingActivity;
 
@@ -38,21 +38,18 @@ import java.util.Map;
 
 public class Home extends AppCompatActivity implements OnMapReadyCallback {
 
-    private final double METERS_VARIATION = 50.0;
-    private Map<Marker, String> markersPartyHashMap;
+    private Map<Marker, String> markersPartyHashMap = new HashMap<Marker, String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        // Define hashmap for markers to string.
-        markersPartyHashMap = new HashMap<Marker, String>();
         // Define profile button logic.
         Button profile = findViewById(R.id.profile_button);
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), Profile.class));
+                startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
             }
         });
         // Define hosting button logic.
@@ -101,6 +98,19 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
         setMapOriginView(googleMap);
         // Populate map with data
         populateMapWithParties(googleMap);
+    }
+
+    private void populateMapWithParties(GoogleMap googleMap) {
+        for(Party party: PartyInterface.getAllParties()) {
+            LatLng partyLocation = new LatLng(party.getLatitude(), party.getLongitude());
+            MarkerOptions markerOptions = new MarkerOptions()
+                    .position(partyLocation)
+                    .title(party.getPartyName())
+                    .snippet(party.getPartyDescription());
+            Marker marker = googleMap.addMarker(markerOptions);
+            // Add marker to hashmap of markers to parties
+            markersPartyHashMap.put(marker, party.getPartyID());
+        }
 
         googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
@@ -115,25 +125,6 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
                 }
             }
         });
-    }
-
-    private void populateMapWithParties(GoogleMap googleMap) {
-        for(Party party: PartyInterface.getAllParties()) {
-            LatLng partyLocation = new LatLng(party.getLatitude(), party.getLongitude());
-            LatLng newRandomLocation = randomizeLatLng(partyLocation, METERS_VARIATION);
-            MarkerOptions markerOptions = new MarkerOptions()
-                    .position(newRandomLocation)
-                    .title(party.getPartyName())
-                    .snippet(party.getPartyDescription());
-            CircleOptions boundingCircle = new CircleOptions()
-                    .center(partyLocation)
-                    .fillColor(Color.parseColor("#3c1361"))
-                    .radius(METERS_VARIATION);
-            Marker marker = googleMap.addMarker(markerOptions);
-            Circle circle = googleMap.addCircle(boundingCircle);
-            // Add marker to hashmap of markers to parties
-            markersPartyHashMap.put(marker, party.getPartyID());
-        }
     }
 
     private void setMapOriginView(GoogleMap googleMap) {

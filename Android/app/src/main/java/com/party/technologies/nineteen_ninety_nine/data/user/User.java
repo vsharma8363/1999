@@ -1,11 +1,32 @@
 package com.party.technologies.nineteen_ninety_nine.data.user;
 
+import java.util.ArrayList;
+
 public class User {
 
     private String phoneNumber;
     private String fullName;
     private String email;
     private String bio;
+
+    public String getInstagramUserName() {
+        return instagramUserName;
+    }
+
+    public void setInstagramUserName(String instagramUserName) {
+        this.instagramUserName = instagramUserName;
+    }
+
+    public ArrayList<String> getInstagramPhotoURLs() {
+        return instagramPhotoURLs;
+    }
+
+    public void setInstagramPhotoURLs(ArrayList<String> instagramPhotoURLs) {
+        this.instagramPhotoURLs = instagramPhotoURLs;
+    }
+
+    private String instagramUserName;
+    private ArrayList<String> instagramPhotoURLs;
 
     public String getUID() {
         return UID;
@@ -26,6 +47,7 @@ public class User {
     public User(String UID, String phoneNumber) {
         this.UID = UID;
         this.phoneNumber = phoneNumber;
+        instagramPhotoURLs = new ArrayList<String>();
         this.accountCreatedTime = System.currentTimeMillis();
     }
 

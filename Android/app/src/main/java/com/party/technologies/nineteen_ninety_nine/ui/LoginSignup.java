@@ -20,6 +20,7 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.party.technologies.nineteen_ninety_nine.R;
+import com.party.technologies.nineteen_ninety_nine.data.Constants;
 import com.party.technologies.nineteen_ninety_nine.data.user.UserInterface;
 
 import net.rimoto.intlphoneinput.IntlPhoneInput;
@@ -34,12 +35,6 @@ public class LoginSignup extends AppCompatActivity {
     private String mVerificationId;
     private PhoneAuthProvider.ForceResendingToken mResendToken;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
-    // Toast messages for the user.
-    private final String INVALID_PHONE_NUMBER_MSG = "Please enter a valid phone number";
-    private final String SERVER_FAILURE_MSG = "Server request error, please try again";
-    private final String EXCEEDED_SERVER_REQUESTS_MSG = "SMS server quota has been exceeded";
-    private final String INCORRECT_VERIFICATION_MSG = "Incorrect verification code";
-    private final String SUCCESSFUL_LOGIN_MSG = "Looks like you're ready to party :)";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,10 +53,10 @@ public class LoginSignup extends AppCompatActivity {
             public void onVerificationFailed(FirebaseException e) {
                 if (e instanceof FirebaseAuthInvalidCredentialsException) {
                     // Invalid request
-                    Toast.makeText(getApplicationContext(), SERVER_FAILURE_MSG, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), Constants.SERVER_FAILURE_MSG, Toast.LENGTH_LONG).show();
                 } else if (e instanceof FirebaseTooManyRequestsException) {
                     // The SMS quota for the project has been exceeded
-                    Toast.makeText(getApplicationContext(), EXCEEDED_SERVER_REQUESTS_MSG, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), Constants.EXCEEDED_SERVER_REQUESTS_MSG, Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -88,7 +83,7 @@ public class LoginSignup extends AppCompatActivity {
         if(phoneNumber != null)
             startPhoneNumberVerification(phoneNumber);
         else {
-            Toast.makeText(getApplicationContext(), INVALID_PHONE_NUMBER_MSG, Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), Constants.INVALID_PHONE_NUMBER_MSG, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -103,7 +98,7 @@ public class LoginSignup extends AppCompatActivity {
         if(phoneNumber != null)
             resendVerificationCode(phoneNumber, this.mResendToken);
         else {
-            Toast.makeText(getApplicationContext(), INVALID_PHONE_NUMBER_MSG, Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), Constants.INVALID_PHONE_NUMBER_MSG, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -157,7 +152,7 @@ public class LoginSignup extends AppCompatActivity {
                             }).start();
                         } else {
                             // Failure
-                            Toast.makeText(getApplicationContext(), INCORRECT_VERIFICATION_MSG, Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), Constants.INCORRECT_VERIFICATION_MSG, Toast.LENGTH_LONG).show();
                         }
                     }
                 });
