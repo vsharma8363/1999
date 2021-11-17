@@ -7,6 +7,15 @@ public class User {
     private String email;
     private String bio;
 
+    public String getUID() {
+        return UID;
+    }
+
+    public void setUID(String UID) {
+        this.UID = UID;
+    }
+
+    private String UID;
     private long accountCreatedTime;
     private long lastLoginTime;
 
@@ -14,7 +23,8 @@ public class User {
         this.accountCreatedTime = System.currentTimeMillis();
     }
 
-    public User(String phoneNumber) {
+    public User(String UID, String phoneNumber) {
+        this.UID = UID;
         this.phoneNumber = phoneNumber;
         this.accountCreatedTime = System.currentTimeMillis();
     }

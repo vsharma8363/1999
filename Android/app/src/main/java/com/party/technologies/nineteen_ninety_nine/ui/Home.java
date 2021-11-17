@@ -19,7 +19,7 @@ import com.party.technologies.nineteen_ninety_nine.R;
 import com.party.technologies.nineteen_ninety_nine.data.party.Party;
 import com.party.technologies.nineteen_ninety_nine.data.party.PartyInterface;
 import com.party.technologies.nineteen_ninety_nine.data.user.UserInterface;
-import com.party.technologies.nineteen_ninety_nine.ui.hosting.HostingParentView;
+import com.party.technologies.nineteen_ninety_nine.ui.hosting.HostingActivity;
 import com.party.technologies.nineteen_ninety_nine.ui.pages.Profile;
 import com.party.technologies.nineteen_ninety_nine.ui.pages.Settings;
 import com.party.technologies.nineteen_ninety_nine.ui.upcoming.UpcomingActivity;
@@ -60,7 +60,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
         hosting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), HostingParentView.class));
+                startActivity(new Intent(getApplicationContext(), HostingActivity.class));
             }
         });
         // Define settings button logic.

@@ -12,7 +12,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class HostingParentView extends AppCompatActivity {
+public class HostingActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

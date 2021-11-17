@@ -58,7 +58,7 @@ public class EditPartyFragment extends Fragment {
                 startActivity(new Intent(getContext(), Home.class));
             }
         });
-
+        
         // Define all displays
         name = view.findViewById(R.id.party_name);
         name.setText(currentParty.getPartyName());

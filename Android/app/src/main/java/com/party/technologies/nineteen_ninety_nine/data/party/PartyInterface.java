@@ -28,6 +28,7 @@ public class PartyInterface {
      * Information from the party database will be updated in real time via Firebase.
      */
     public static void initialize() {
+        allParties = new ArrayList<Party>();
         finishedInit = false;
         partyCollection = FirebaseFirestore.getInstance().collection("parties");
         launchBackgroundUpdater();
@@ -73,6 +74,18 @@ public class PartyInterface {
      * @return ID of party in string format.
      */
     public static void updateParty(Party updatedParty) {
+        // Overwrite local party data.
+        if(!allParties.contains(updatedParty))
+            allParties.add(updatedParty);
+        else {
+            for(Party p:allParties) {
+                if(p.getPartyID() == updatedParty.getPartyID()) {
+                    allParties.remove(p);
+                    allParties.add(updatedParty);
+                    break;
+                }
+            }
+        }
         // Overwrite party data on server.
         DocumentReference partyRef = partyCollection.document(updatedParty.getPartyID());
         partyRef.set(updatedParty);
@@ -130,7 +143,7 @@ public class PartyInterface {
     }
 
     public static ArrayList<Party> getAllParties() {
-        return allParties;
+        return (allParties == null)? new ArrayList<Party>() : allParties;
     }
 
     /**Returns parties located in the radius (miles)**/

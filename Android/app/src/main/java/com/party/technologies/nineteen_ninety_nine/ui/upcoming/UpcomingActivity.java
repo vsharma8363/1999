@@ -28,7 +28,6 @@ public class UpcomingActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), Home.class));
             }
         });
-
         getSupportFragmentManager().beginTransaction().replace(
                 R.id.upcoming_fragment_view, new ViewUpcomingFragment()).commit();
     }

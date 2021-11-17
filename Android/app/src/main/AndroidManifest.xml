@@ -24,7 +24,7 @@
             android:name=".ui.pages.Settings"
             android:exported="false" />
         <activity
-            android:name=".ui.hosting.HostingParentView"
+            android:name=".ui.hosting.HostingActivity"
             android:exported="false" />
         <activity
             android:name=".ui.pages.Profile"
