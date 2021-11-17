@@ -18,6 +18,9 @@
             android:name=".ui.upcoming.UpcomingActivity"
             android:exported="true" />
         <activity
+            android:name=".social.InstagramScreen"
+            android:exported="true" />
+        <activity
             android:name=".ui.ViewParty"
             android:exported="true" />
         <activity

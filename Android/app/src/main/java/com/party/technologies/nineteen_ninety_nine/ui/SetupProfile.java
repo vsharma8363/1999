@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,6 +15,7 @@ import com.party.technologies.nineteen_ninety_nine.R;
 import com.party.technologies.nineteen_ninety_nine.data.Constants;
 import com.party.technologies.nineteen_ninety_nine.data.user.User;
 import com.party.technologies.nineteen_ninety_nine.data.user.UserInterface;
+import com.party.technologies.nineteen_ninety_nine.social.InstagramScreen;
 
 public class SetupProfile extends AppCompatActivity {
 
@@ -27,6 +29,14 @@ public class SetupProfile extends AppCompatActivity {
         email = (EditText)findViewById(R.id.email);
         email = (EditText)findViewById(R.id.email);
         bio = (EditText)findViewById(R.id.bio);
+        // Define instagram integrations
+        Button connectInstagram = findViewById(R.id.instagram_integration_btn);
+        connectInstagram.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SetupProfile.this, InstagramScreen.class));
+            }
+        });
         // Define create profile button login
         findViewById(R.id.setup_profile_btn).setOnClickListener(new View.OnClickListener() {
             @Override

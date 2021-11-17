@@ -59,6 +59,12 @@
             android:inputType="text" />
 
         <Button
+            android:id="@+id/instagram_integration_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Connect to Instagram" />
+
+        <Button
             android:id="@+id/setup_profile_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -36,7 +36,7 @@ public class ProfileFragment extends Fragment {
         TextView fullName = view.findViewById(R.id.full_name);
         fullName.setText(user.getFullName() + "\n");
         TextView phoneNumber = view.findViewById(R.id.phone_number);
-        phoneNumber.setText(user.getPhoneNumber() + "\n");
+        phoneNumber.setText(user.getPhoneNumber() + "\nIG Username:" + UserInterface.getCurrentUser().getInstagramUserName() + "\n");
         TextView email = view.findViewById(R.id.email);
         email.setText(user.getEmail() + "\n");
         TextView bio = view.findViewById(R.id.bio);
