@@ -83,6 +83,7 @@ public class InstagramScreen extends SetupProfile {
                                 getInstagramHandle();
                                 // Get all photos.
                                 getInstagramPhotos();
+                                finish();
                             }
                             catch (JSONException e) {
                                 e.printStackTrace();
