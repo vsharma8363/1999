@@ -7,9 +7,11 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.provider.Telephony;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Space;
@@ -21,6 +23,8 @@ import com.party.technologies.nineteen_ninety_nine.data.party.PartyInterface;
 import com.party.technologies.nineteen_ninety_nine.data.user.UserInterface;
 import com.party.technologies.nineteen_ninety_nine.ui.Home;
 import com.party.technologies.nineteen_ninety_nine.ui.ViewParty;
+
+import java.util.ArrayList;
 
 public class ViewUpcomingFragment extends Fragment {
 
@@ -42,9 +46,10 @@ public class ViewUpcomingFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_view_upcoming, container, false);
         // Linear Layout to present all party views
-        LinearLayout upcomingView = view.findViewById(R.id.upcoming_list);
+        LinearLayout upcomingList = view.findViewById(R.id.upcoming_list);
+        ArrayList<String> allPartyNames = new ArrayList<String>();
         for(Party party: PartyInterface.getUpcomingParties(UserInterface.getCurrentUserUID())) {
-            upcomingView.addView(getPartyView(party));
+            upcomingList.addView(getPartyView(party));
         }
         return view;
     }
@@ -78,6 +83,8 @@ public class ViewUpcomingFragment extends Fragment {
             partyElement.setBackgroundColor(Color.GRAY);
         else if(party.getGuestsDenied().contains(UserInterface.getCurrentUserUID()))
             partyElement.setBackgroundColor(Color.RED);
+        else
+            partyElement.setBackgroundColor(Color.YELLOW);
         partyElement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

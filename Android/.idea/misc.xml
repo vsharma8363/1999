@@ -31,6 +31,7 @@
         <entry key="app/src/main/res/layout/fragment_upcoming.xml" value="0.11096014492753623" />
         <entry key="app/src/main/res/layout/fragment_view_upcoming.xml" value="0.33016304347826086" />
         <entry key="app/src/main/res/layout/hosting_new_edit_party.xml" value="0.15364583333333334" />
+        <entry key="app/src/main/res/layout/party_item.xml" value="0.1" />
       </map>
     </option>
   </component>
