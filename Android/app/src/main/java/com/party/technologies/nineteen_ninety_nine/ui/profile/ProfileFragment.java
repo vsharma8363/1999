@@ -59,6 +59,7 @@ public class ProfileFragment extends Fragment {
             public void run() {
                 while(UserInterface.getCurrentUser().getInstagramUserName() == null){}
                 instagramButton.setText("@" + UserInterface.getCurrentUser().getInstagramUserName());
+                UserInterface.updateUserData();
                 instagramButton.setBackgroundColor(Color.CYAN);
                 instagramButton.setClickable(false);
                 instagramButton.setOnClickListener(new View.OnClickListener() {
