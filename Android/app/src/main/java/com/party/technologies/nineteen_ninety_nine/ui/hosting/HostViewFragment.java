@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.HorizontalScrollView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -68,6 +70,16 @@ public class HostViewFragment extends Fragment {
     }
 
     private void populatePartyInformation(View view, Party hostingParty) {
+        LinearLayout partyImageLayout = new LinearLayout(getActivity());
+        partyImageLayout.setOrientation(LinearLayout.HORIZONTAL);
+        for(String imageURL: hostingParty.getPartyImages()) {
+            ImageView img = new ImageView(getActivity());
+            PartyInterface.loadImageToImageView(imageURL, img, getActivity());
+            img.setLayoutParams(new LinearLayout.LayoutParams(500, 1000));
+            img.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            partyImageLayout.addView(img);
+        }
+        ((HorizontalScrollView)view.findViewById(R.id.party_image_scrollable)).addView(partyImageLayout);
         // Define views and components.
         TextView name = view.findViewById(R.id.hosting_party_name);
         TextView description = view.findViewById(R.id.hosting_party_description);
@@ -90,7 +102,6 @@ public class HostViewFragment extends Fragment {
 
         ArrayList<UserProfile> profiles = new ArrayList<UserProfile>();
         SwipeDeck cardStack = (SwipeDeck) view.findViewById(R.id.swipe_deck);
-
         for(User guest:pendingGuests) {
             UserProfile profile = new UserProfile(
                     guest.getFullName(),

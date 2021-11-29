@@ -1,11 +1,15 @@
 package com.party.technologies.nineteen_ninety_nine.data.party;
 
+import android.content.Context;
 import android.net.Uri;
 import android.os.Build;
+import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.EventListener;
@@ -17,11 +21,11 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.party.technologies.nineteen_ninety_nine.data.user.User;
 import com.party.technologies.nineteen_ninety_nine.data.user.UserInterface;
+import com.party.technologies.nineteen_ninety_nine.ui.misc.ImageLoadTask;
 
 import java.util.ArrayList;
 import java.util.UUID;
 
-import io.grpc.Context;
 
 public class PartyInterface {
 
@@ -36,6 +40,17 @@ public class PartyInterface {
         String firebasePartyImage = "images/" + UUID.randomUUID().toString();
         storageReference.child(firebasePartyImage).putFile(partyImage);
         partyImages.add(firebasePartyImage);
+    }
+
+    public static void loadImageToImageView(String imagePath, ImageView imageView, Context context) {
+        StorageReference ref = storageReference.child(imagePath);
+        ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                new ImageLoadTask(uri.toString(), imageView).execute();
+                System.out.println(uri.toString());
+            }
+        });
     }
 
     private static ArrayList<String> partyImages;
@@ -171,5 +186,9 @@ public class PartyInterface {
     /**Returns parties located in the radius (miles)**/
     public static ArrayList<Party> getPartiesInRadius(double longitude, double latitude, double radiusMiles) {
         return null;
+    }
+
+    public static void resetPartyImages() {
+        partyImages.clear();
     }
 }

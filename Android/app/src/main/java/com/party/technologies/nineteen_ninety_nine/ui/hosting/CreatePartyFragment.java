@@ -7,8 +7,10 @@ import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.drawable.GradientDrawable;
 import android.location.Address;
 import android.location.Geocoder;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -18,6 +20,8 @@ import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -41,10 +45,10 @@ public class CreatePartyFragment extends Fragment {
     private TextView description;
     private TextView address;
     private TextView apartment_unit;
-    private LinearLayout partyImageLayout;
-    private ImageView addPartyImage;
     private int PICK_IMAGE_MULTIPLE = 1;
+    private HorizontalScrollView scrollView;
     private ArrayList<Uri> partyImages;
+    private Party currentParty;
 
     public CreatePartyFragment() {
     }
@@ -63,43 +67,15 @@ public class CreatePartyFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_create_party, container, false);
-        Party currentParty = PartyInterface.getPartyByHost(UserInterface.getCurrentUserUID());
+        currentParty = PartyInterface.getPartyByHost(UserInterface.getCurrentUserUID());
         partyImages = new ArrayList<Uri>();
         // Define all displays
         name = view.findViewById(R.id.party_name);
         description = view.findViewById(R.id.party_description);
         address = view.findViewById(R.id.party_address);
         apartment_unit = view.findViewById(R.id.suite_unit);
-        partyImageLayout = view.findViewById(R.id.party_images);
-        addPartyImage = view.findViewById(R.id.add_party_image);
+        scrollView = view.findViewById(R.id.scroll_view);
         // Create image adding logic
-        addPartyImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent,"Select Picture"), PICK_IMAGE_MULTIPLE);
-            }
-        });
-
-        if(currentParty != null) {
-            name.setText(currentParty.getPartyName());
-            description.setText(currentParty.getPartyDescription());
-            address.setText(currentParty.getAddress());
-            apartment_unit.setText(currentParty.getApartment_unit());
-            view.findViewById(R.id.delete_party).setVisibility(View.VISIBLE);
-            view.findViewById(R.id.delete_party).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    PartyInterface.deleteParty(currentParty.getPartyID());
-                    startActivity(new Intent(getContext(), Home.class));
-                }
-            });
-        }
-        else
-            view.findViewById(R.id.delete_party).setVisibility(View.INVISIBLE);
 
         // Set submission logic.
         view.findViewById(R.id.done_editing_party).setOnClickListener(new View.OnClickListener() {
@@ -121,14 +97,13 @@ public class CreatePartyFragment extends Fragment {
                         updatedParty.setApartment_unit(apartment_unit.getText().toString());
                         updatedParty.setLongitude(address_latlng.longitude);
                         updatedParty.setLatitude(address_latlng.latitude);
-                        PartyInterface.updateParty(updatedParty);
-                        for(String imageURL:currentParty.getPartyImages()) {
-                            ImageView im = new ImageView(getActivity());
-                            im.setLayoutParams(new LinearLayout.LayoutParams(addPartyImage.getWidth(), addPartyImage.getHeight()));
-                            im.setScaleType(ImageView.ScaleType.FIT_CENTER);
-                            partyImageLayout.addView(im);
-                            UserInterface.loadImageToImageView(imageURL, im, getActivity());
+                        if(partyImages.size() > 0) {
+                            PartyInterface.resetPartyImages();
+                            for(Uri partyURI:partyImages)
+                                PartyInterface.uploadPartyImage(partyURI);
+                            updatedParty.setPartyImages(PartyInterface.getPartyImages());
                         }
+                        PartyInterface.updateParty(updatedParty);
                     }
                     else {
                         // All information is valid, create a new party object
@@ -142,11 +117,65 @@ public class CreatePartyFragment extends Fragment {
                                 PartyInterface.getPartyImages());
                         PartyInterface.publishParty(newParty);
                     }
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(
-                            R.id.hosting_fragment_view, new HostViewFragment()).commit();
+                    startActivity(new Intent(getContext(), Home.class));
                 }
             }
         });
+
+        LinearLayout partyImageLayout = new LinearLayout(getActivity());
+        partyImageLayout.setOrientation(LinearLayout.HORIZONTAL);
+        if(currentParty != null) {
+            for(String imageURL:currentParty.getPartyImages()) {
+                ImageView img = new ImageView(getActivity());
+                PartyInterface.loadImageToImageView(imageURL, img, getActivity());
+                img.setLayoutParams(new LinearLayout.LayoutParams(500, 1000));
+                img.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                partyImageLayout.addView(img);
+                img.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent();
+                        intent.setType("image/*");
+                        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                        intent.setAction(Intent.ACTION_GET_CONTENT);
+                        startActivityForResult(Intent.createChooser(intent,"Select Picture"), PICK_IMAGE_MULTIPLE);
+                    }
+                });
+            }
+            name.setText(currentParty.getPartyName());
+            description.setText(currentParty.getPartyDescription());
+            address.setText(currentParty.getAddress());
+            apartment_unit.setText(currentParty.getApartment_unit());
+            view.findViewById(R.id.delete_party).setVisibility(View.VISIBLE);
+            view.findViewById(R.id.delete_party).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    PartyInterface.deleteParty(currentParty.getPartyID());
+                    startActivity(new Intent(getContext(), Home.class));
+                }
+            });
+        }
+        else {
+            view.findViewById(R.id.delete_party).setVisibility(View.INVISIBLE);
+            ImageView img = new ImageView(getActivity());
+            img.setImageDrawable(getResources().getDrawable(R.drawable.add_image));
+            img.setLayoutParams(new LinearLayout.LayoutParams(500, 1000));
+            img.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            partyImageLayout.addView(img);
+            img.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.setType("image/*");
+                    intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                    intent.setAction(Intent.ACTION_GET_CONTENT);
+                    startActivityForResult(Intent.createChooser(intent,"Select Picture"), PICK_IMAGE_MULTIPLE);
+                }
+            });
+        }
+        scrollView.addView(partyImageLayout);
+
+
         return view;
     }
 
@@ -159,7 +188,7 @@ public class CreatePartyFragment extends Fragment {
             Toast.makeText(getActivity(), MISSING_INFO_MSG + "party name.", Toast.LENGTH_SHORT).show();
         else if(address_latlng == null)
             Toast.makeText(getActivity(), MISSING_INFO_MSG + "address.", Toast.LENGTH_SHORT).show();
-        else if(partyImages.size() <= 0)
+        else if(partyImages.size() <= 0 && currentParty == null)
             Toast.makeText(getActivity(), "Please upload images of the party", Toast.LENGTH_SHORT).show();
         else
             return true;
@@ -209,12 +238,17 @@ public class CreatePartyFragment extends Fragment {
                 //do something with the image (save it to some directory or whatever you need to do with it here)
             }
         }
+        scrollView.removeAllViews();
+        LinearLayout partyImageLayout = new LinearLayout(getActivity());
+        partyImageLayout.setOrientation(LinearLayout.HORIZONTAL);
         for(Uri uri:partyImages) {
-            ImageView im = new ImageView(getActivity());
-            im.setImageURI(uri);
-            im.setLayoutParams(new LinearLayout.LayoutParams(addPartyImage.getWidth(), addPartyImage.getHeight()));
-            im.setScaleType(ImageView.ScaleType.FIT_CENTER);
-            partyImageLayout.addView(im);
+            ImageView img = new ImageView(getActivity());
+            img.setImageURI(uri);
+            img.setLayoutParams(new LinearLayout.LayoutParams(500, 1000));
+            img.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            partyImageLayout.addView(img);
         }
+        scrollView.addView(partyImageLayout);
+
     }
 }

@@ -5,10 +5,21 @@
     android:layout_height="match_parent"
     tools:context=".ui.hosting.HostViewFragment">
 
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
+        <HorizontalScrollView
+            android:id="@+id/party_image_scrollable"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+        </HorizontalScrollView>
 
         <TextView
             android:id="@+id/hosting_party_name"
@@ -57,4 +68,6 @@
             android:text="Edit Party" />
 
     </LinearLayout>
+
+    </ScrollView>
 </FrameLayout>
