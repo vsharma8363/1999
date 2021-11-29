@@ -14,6 +14,26 @@
         tools:layout_editor_absoluteY="1dp">
 
         <TextView
+            android:id="@+id/pictures_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Profile Pictures:" />
+
+        <LinearLayout
+            android:id="@+id/pictures_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/add_profile_picture"
+                android:layout_width="125dp"
+                android:layout_height="125dp"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/add_image" />
+        </LinearLayout>
+
+        <TextView
             android:id="@+id/full_name_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -59,9 +79,22 @@
             android:inputType="text" />
 
         <Button
-            android:id="@+id/setup_profile_btn"
+            android:id="@+id/connect_instagram"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="Connect with Instagram" />
+
+        <LinearLayout
+            android:id="@+id/instagram_photos"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"></LinearLayout>
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="submitProfile"
             android:text="Submit Changes" />
 
     </LinearLayout>
