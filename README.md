@@ -17,6 +17,7 @@
   ░╚══════╝░░╚════╝░░░╚════╝░░░░░░░╚════╝░░╚════╝░██░░<br/>
   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░<br/>
 </p>
+
 ## Table of Contents 🗂
 
   * [Description](https://github.com/sm7541/Readme#description-)<br/>
@@ -43,7 +44,23 @@ Before you begin, ensure you have met the following requirements:<br/>
 ✅ &nbsp; You have a Android Device or Emulator with Android Version 6.0 or above. <br/>
 ✅ &nbsp; You want to party like it's 1999! <br/>
 
-## Installing Android 1999! App 📥
+## Dev in Android Studio ✏️
+
+Please refer to "Prerequisites 💻" for the required materials before starting!
+
+* STEP 1: In Android Studio please navigate to:
+  * Tools > SDK Manager > SDK Tools
+  * Confirm that "Android SDK Command-line Tools (latest)" is checked 
+* STEP 2: Clone the repo from Github to your local computer
+  * Click [here](https://github.com/vsharma8363/1999) for easy access to clone the repo
+* STEP 3: Opening the project by navigating to:
+  * Open
+  * Select the *Android* folder in the 1999 repository 
+* STEP 4: If you have successfully cloned the repo from GitHub to your local computer then the project should be in */1999/Android*
+* STEP 5: Once opened, the project should look as follows:
+
+![SS](https://user-images.githubusercontent.com/71827996/143913233-29ee1e99-dda1-40e7-a954-e932841c1a90.png)
+
 
 ## Running the sample app 🚀
 
