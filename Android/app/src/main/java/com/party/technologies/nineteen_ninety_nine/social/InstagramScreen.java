@@ -49,6 +49,8 @@ public class InstagramScreen extends AppCompatActivity {
     private RequestQueue queue;
     private String instagramUID;
     private String instagramToken;
+    private ArrayList<String> media_ids;
+    private ArrayList<String> media_links;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +86,8 @@ public class InstagramScreen extends AppCompatActivity {
                                 // Get profile username.
                                 setInstagramHandle();
                                 // Get all photos.
-                                getInstagramPhotos();
+
+
                             }
                             catch (JSONException e) {
                                 e.printStackTrace();
@@ -119,12 +122,27 @@ public class InstagramScreen extends AppCompatActivity {
     }
 
     private String setInstagramHandle() {
-        String url = "https://graph.instagram.com/" + instagramUID + "?fields=id,username&access_token=" + instagramToken;
+        String url = "https://graph.instagram.com/" + instagramUID + "?fields=id,username,media&access_token=" + instagramToken;
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try{
                     JSONObject obj = new JSONObject(response);
+                    JSONObject media = (JSONObject) obj.get("media");
+
+                    String media_ids_string = media.get("data").toString();
+                    String media_ids_substring = media_ids_string.substring(1, media_ids_string.length()-1);
+                    String[] media_ids_arr = media_ids_substring.split(",");
+                    media_ids = new ArrayList<String>();
+                    for (String id: media_ids_arr) {
+                        String substring_id = id.substring(7, id.length() - 2);
+                        media_ids.add(substring_id);
+                    }
+                    media_links = new ArrayList<String>();
+                    for (String id: media_ids) {
+                        getInstagramPhoto(id);
+                    }
+
                     UserInterface.getCurrentUser().setInstagramUserName(obj.get("username").toString());
                     finish();
                 }
@@ -142,7 +160,28 @@ public class InstagramScreen extends AppCompatActivity {
         return null;
     }
 
-    private ArrayList<String> getInstagramPhotos() {
+    private String getInstagramPhoto(String media_id) {
+        String url = "https://graph.instagram.com/" + media_id + "?fields=media_url&access_token=" + instagramToken;
+        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try{
+                    JSONObject obj = new JSONObject(response);
+                    String link = obj.get("media_url").toString();
+                    media_links.add(link);
+                    System.out.println(media_links);
+                }
+                catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        queue.add(request);
         // null if no photos exist.
         return null;
     }
