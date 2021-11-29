@@ -1,13 +1,17 @@
 package com.party.technologies.nineteen_ninety_nine.data.user;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.net.Uri;
 import android.text.style.IconMarginSpan;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.bumptech.glide.Glide;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,6 +27,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.party.technologies.nineteen_ninety_nine.R;
 import com.party.technologies.nineteen_ninety_nine.data.party.Party;
 
 import java.util.ArrayList;
@@ -40,7 +45,7 @@ public class UserInterface {
     private static ArrayList<User> allUsers;
     private static String igUserName;
     private static StorageReference storageReference;
-    private static ArrayList<String> profilePictures;
+    private static String firebaseProfilePicture;
 
     public static void initialize(FirebaseUser firebaseUser) {
         currentUserInitialized = false;
@@ -48,7 +53,6 @@ public class UserInterface {
         fbUser = firebaseUser;
         usersCollection = FirebaseFirestore.getInstance().collection("users");
         userRef = usersCollection.document(fbUser.getUid());
-        profilePictures = new ArrayList<String>();
         storageReference = FirebaseStorage.getInstance().getReference();
         launchBackgroundUpdater();
     }
@@ -89,10 +93,11 @@ public class UserInterface {
         return currentUser == null;
     }
 
-    public static void setupNewUser() {
+    public static void setupNewUser(Uri profilePicture) {
         User newUser = new User(fbUser.getUid(), fbUser.getPhoneNumber());
+        uploadImage(profilePicture);
+        newUser.setProfilePicture(firebaseProfilePicture);
         currentUser = newUser;
-        currentUser.setProfilePictures(profilePictures);
         userRef.set(newUser);
     }
 
@@ -133,12 +138,11 @@ public class UserInterface {
 
     public static void uploadImage(Uri filePath)
     {
-        String imagePathFB = "images/" + UUID.randomUUID().toString();
-        profilePictures.add(imagePathFB);
+        firebaseProfilePicture = "images/" + UUID.randomUUID().toString();
         StorageReference ref
                     = storageReference
                     .child(
-                            imagePathFB);
+                            firebaseProfilePicture);
 
             // adding listeners on upload
             // or failure of image
@@ -161,5 +165,15 @@ public class UserInterface {
 
                         }
                     });
-        }
+    }
+
+    public static void loadImageToImageView(String imagePath, ImageView imageView, Context context) {
+        StorageReference ref = storageReference.child(imagePath);
+        ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(context).load(uri.toString()).into(imageView);
+            }
+        });
+    }
 }

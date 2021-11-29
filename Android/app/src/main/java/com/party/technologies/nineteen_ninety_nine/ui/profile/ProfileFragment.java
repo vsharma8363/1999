@@ -39,10 +39,13 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         User user = UserInterface.getCurrentUser();
+        UserInterface.loadImageToImageView(user.getProfilePicture(),
+                view.findViewById(R.id.profile_pic_view),
+                getActivity());
         TextView fullName = view.findViewById(R.id.full_name);
         fullName.setText(user.getFullName() + "\n");
         TextView phoneNumber = view.findViewById(R.id.phone_number);
-        phoneNumber.setText(user.getPhoneNumber() + "\nIG Username:" + UserInterface.getCurrentUser().getInstagramUserName() + "\n");
+        phoneNumber.setText(user.getPhoneNumber() + "\n");
         TextView email = view.findViewById(R.id.email);
         email.setText(user.getEmail() + "\n");
         TextView bio = view.findViewById(R.id.bio);

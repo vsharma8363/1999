@@ -1,9 +1,12 @@
 package com.party.technologies.nineteen_ninety_nine.data.party;
 
+import android.net.Uri;
 import android.os.Build;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
+
+import com.party.technologies.nineteen_ninety_nine.data.user.UserInterface;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,6 +16,16 @@ public class Party {
 
     private Map<String, Object> attributes;
     private ArrayList<String> guestsApproved;
+
+    public ArrayList<String> getPartyImages() {
+        return partyImages;
+    }
+
+    public void setPartyImages(ArrayList<String> partyImages) {
+        this.partyImages = partyImages;
+    }
+
+    private ArrayList<String> partyImages;
 
     public void setGuestsApproved(ArrayList<String> guestsApproved) {
         this.guestsApproved = guestsApproved;
@@ -44,11 +57,12 @@ public class Party {
     public Party() {
         attributes = new HashMap<String, Object>();
         guestsApproved = new ArrayList<String>();
+        partyImages = new ArrayList<String>();
         guestsPending = new ArrayList<String>();
         guestsDenied = new ArrayList<String>();
     }
 
-    public Party(String hostID, String name, String description, String address, String apartmentUnit, double longitude, double latitude) {
+    public Party(String hostID, String name, String description, String address, String apartmentUnit, double longitude, double latitude, ArrayList<String> partyImages) {
         attributes = new HashMap<String, Object>();
         attributes.put("hostID", hostID);
         attributes.put("partyName", name);
@@ -63,6 +77,7 @@ public class Party {
         guestsApproved = new ArrayList<String>();
         guestsPending = new ArrayList<String>();
         guestsDenied = new ArrayList<String>();
+        this.partyImages = partyImages;
     }
 
     public String getHostID() {

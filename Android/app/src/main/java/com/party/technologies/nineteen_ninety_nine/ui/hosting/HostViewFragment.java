@@ -6,18 +6,23 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.daprlabs.cardstack.SwipeDeck;
 import com.party.technologies.nineteen_ninety_nine.R;
 import com.party.technologies.nineteen_ninety_nine.data.party.Party;
 import com.party.technologies.nineteen_ninety_nine.data.party.PartyInterface;
 import com.party.technologies.nineteen_ninety_nine.data.user.User;
 import com.party.technologies.nineteen_ninety_nine.data.user.UserInterface;
+import com.party.technologies.nineteen_ninety_nine.ui.misc.UserAdapter;
+import com.party.technologies.nineteen_ninety_nine.ui.misc.UserProfile;
 
 import java.util.ArrayList;
 
@@ -83,79 +88,62 @@ public class HostViewFragment extends Fragment {
         for(String UID:hostingParty.getGuestsDenied())
             deniedGuests.add(UserInterface.getUser(UID));
 
-        LinearLayout requested = view.findViewById(R.id.requested);
-        requested.removeAllViews();
-        for (User pending:pendingGuests) {
-            Button approve = new Button(getActivity());
-            approve.setText("Approve");
-            approve.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    hostingParty.addApprovedGuest(pending.getUID());
-                    populateGuestScreeningView(view, hostingParty);
-                    PartyInterface.updateParty(hostingParty);
-                }
-            });
-            Button deny = new Button(getActivity());
-            deny.setText("Deny");
-            deny.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    hostingParty.addDeniedGuest(pending.getUID());
-                    populateGuestScreeningView(view, hostingParty);
-                    PartyInterface.updateParty(hostingParty);
-                }
-            });
-            TextView userName = new TextView(getActivity());
-            userName.setText(pending.getFullName());
-            LinearLayout subview = new LinearLayout(getActivity());
-            subview.setOrientation(LinearLayout.HORIZONTAL);
-            subview.addView(userName);
-            subview.addView(deny);
-            subview.addView(approve);
-            subview.setBackgroundColor(Color.GRAY);
-            requested.addView(subview);
+        ArrayList<UserProfile> profiles = new ArrayList<UserProfile>();
+        SwipeDeck cardStack = (SwipeDeck) view.findViewById(R.id.swipe_deck);
+
+        for(User guest:pendingGuests) {
+            UserProfile profile = new UserProfile(
+                    guest.getFullName(),
+                    guest.getPhoneNumber(),
+                    guest.getBio(),
+                    guest.getAge(),
+                    guest.getInstagramUserName(),
+                    guest.getProfilePicture());
+            profiles.add(profile);
         }
-        for (User accepted:acceptedGuests) {
-            Button deny = new Button(getActivity());
-            deny.setText("Deny");
-            deny.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    hostingParty.addDeniedGuest(accepted.getUID());
-                    populateGuestScreeningView(view, hostingParty);
-                    PartyInterface.updateParty(hostingParty);
-                }
-            });
-            TextView userName = new TextView(getActivity());
-            userName.setText(accepted.getFullName());
-            LinearLayout subview = new LinearLayout(getActivity());
-            subview.setOrientation(LinearLayout.HORIZONTAL);
-            subview.addView(userName);
-            subview.addView(deny);
-            subview.setBackgroundColor(Color.GREEN);
-            requested.addView(subview);
-        }
-        for (User denied:deniedGuests) {
-            Button approve = new Button(getActivity());
-            approve.setText("Approve");
-            approve.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    hostingParty.addApprovedGuest(denied.getUID());
-                    populateGuestScreeningView(view, hostingParty);
-                    PartyInterface.updateParty(hostingParty);
-                }
-            });
-            TextView userName = new TextView(getActivity());
-            userName.setText(denied.getFullName());
-            LinearLayout subview = new LinearLayout(getActivity());
-            subview.setOrientation(LinearLayout.HORIZONTAL);
-            subview.addView(userName);
-            subview.addView(approve);
-            subview.setBackgroundColor(Color.RED);
-            requested.addView(subview);
-        }
+
+        final UserAdapter adapter = new UserAdapter(profiles, getActivity());
+
+        // on below line we are setting adapter to our card stack.
+        cardStack.setAdapter(adapter);
+
+        cardStack.setEventCallback(new SwipeDeck.SwipeEventCallback() {
+            @Override
+            public void cardSwipedLeft(int position) {
+                // Accept
+                User guest = pendingGuests.get(position);
+                // on card swiped to right we are displaying a toast message.
+                hostingParty.addDeniedGuest(guest.getUID());
+                Toast.makeText(getActivity(), guest.getFullName() + " isn't coming.", Toast.LENGTH_SHORT).show();
+                PartyInterface.updateParty(hostingParty);
+            }
+
+            @Override
+            public void cardSwipedRight(int position) {
+                // Accept
+                User guest = pendingGuests.get(position);
+                // on card swiped to right we are displaying a toast message.
+                hostingParty.addApprovedGuest(guest.getUID());
+                Toast.makeText(getActivity(), guest.getFullName() + " is invited!", Toast.LENGTH_SHORT).show();
+                PartyInterface.updateParty(hostingParty);
+            }
+
+            @Override
+            public void cardsDepleted() {
+                // this method is called when no card is present
+                Toast.makeText(getActivity(), "No more guests to screen", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void cardActionDown() {
+
+            }
+
+            @Override
+            public void cardActionUp() {
+
+            }
+        });
     }
 
 

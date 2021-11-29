@@ -1,5 +1,6 @@
 package com.party.technologies.nineteen_ninety_nine.data.party;
 
+import android.net.Uri;
 import android.os.Build;
 
 import androidx.annotation.Nullable;
@@ -12,14 +13,32 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.party.technologies.nineteen_ninety_nine.data.user.User;
 import com.party.technologies.nineteen_ninety_nine.data.user.UserInterface;
 
 import java.util.ArrayList;
+import java.util.UUID;
+
+import io.grpc.Context;
 
 public class PartyInterface {
 
     private static ArrayList<Party> allParties;
+    private static StorageReference storageReference;
+
+    public static ArrayList<String> getPartyImages() {
+        return partyImages;
+    }
+
+    public static void uploadPartyImage(Uri partyImage) {
+        String firebasePartyImage = "images/" + UUID.randomUUID().toString();
+        storageReference.child(firebasePartyImage).putFile(partyImage);
+        partyImages.add(firebasePartyImage);
+    }
+
+    private static ArrayList<String> partyImages;
     private static CollectionReference partyCollection;
     private static boolean finishedInit;
 
@@ -29,7 +48,9 @@ public class PartyInterface {
      */
     public static void initialize() {
         allParties = new ArrayList<Party>();
+        partyImages = new ArrayList<String>();
         finishedInit = false;
+        storageReference = FirebaseStorage.getInstance().getReference();
         partyCollection = FirebaseFirestore.getInstance().collection("parties");
         launchBackgroundUpdater();
     }
