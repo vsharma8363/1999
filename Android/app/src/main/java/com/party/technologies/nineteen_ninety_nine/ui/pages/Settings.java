@@ -24,5 +24,10 @@ public class Settings extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), Home.class));
             }
         });
+
+        /**
+         * TODO(Bea): Create a list view like the one described under the "Settings" page in the wireframes.
+         *  The XML file related to this java ile is res/layout/activity_settings.xml
+         */
     }
 }

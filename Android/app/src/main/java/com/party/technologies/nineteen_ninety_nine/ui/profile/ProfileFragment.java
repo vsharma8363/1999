@@ -49,27 +49,9 @@ public class ProfileFragment extends Fragment {
         bio.setText(user.getBio() + "\n");
         // Connect to instagram
         Button instagramButton = view.findViewById(R.id.connect_to_instagram);
-        instagramButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), InstagramScreen.class));
-            }
-        });
-        new Thread() {
-            public void run() {
-                while(UserInterface.getCurrentUser().getInstagramUserName() == null){}
-                instagramButton.setText("@" + UserInterface.getCurrentUser().getInstagramUserName());
-                UserInterface.updateUserData();
-                instagramButton.setBackgroundColor(Color.CYAN);
-                instagramButton.setClickable(false);
-                instagramButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        startActivity(new Intent(getActivity(), InstagramScreen.class));
-                    }
-                });
-            }
-        }.start();
+        instagramButton.setText("@" + UserInterface.getCurrentUser().getInstagramUserName());
+        instagramButton.setBackgroundColor(Color.CYAN);
+        instagramButton.setClickable(false);
         return view;
     }
 }

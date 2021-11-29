@@ -128,27 +128,28 @@ public class InstagramScreen extends AppCompatActivity {
             public void onResponse(String response) {
                 try{
                     JSONObject obj = new JSONObject(response);
-                    JSONObject media = (JSONObject) obj.get("media");
-
-                    String media_ids_string = media.get("data").toString();
-                    String media_ids_substring = media_ids_string.substring(1, media_ids_string.length()-1);
-                    String[] media_ids_arr = media_ids_substring.split(",");
-                    media_ids = new ArrayList<String>();
-                    for (String id: media_ids_arr) {
-                        String substring_id = id.substring(7, id.length() - 2);
-                        media_ids.add(substring_id);
-                    }
-                    media_links = new ArrayList<String>();
-                    for (String id: media_ids) {
-                        getInstagramPhoto(id);
-                    }
-
-                    UserInterface.getCurrentUser().setInstagramUserName(obj.get("username").toString());
-                    finish();
+                    UserInterface.setInstagramUserName(obj.get("username").toString());
+                    /**
+                     * JSONObject media = (JSONObject) obj.get("media");
+                     *
+                     *                     String media_ids_string = media.get("data").toString();
+                     *                     String media_ids_substring = media_ids_string.substring(1, media_ids_string.length()-1);
+                     *                     String[] media_ids_arr = media_ids_substring.split(",");
+                     *                     media_ids = new ArrayList<String>();
+                     *                     for (String id: media_ids_arr) {
+                     *                         String substring_id = id.substring(7, id.length() - 2);
+                     *                         media_ids.add(substring_id);
+                     *                     }
+                     *                     media_links = new ArrayList<String>();
+                     *                     for (String id: media_ids) {
+                     *                         getInstagramPhoto(id);
+                     *                     }
+                     */
                 }
                 catch (JSONException e) {
                     e.printStackTrace();
                 }
+                finish();
             }
         }, new Response.ErrorListener() {
             @Override

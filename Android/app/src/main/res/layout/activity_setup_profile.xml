@@ -20,17 +20,37 @@
             android:text="Profile Pictures:" />
 
         <LinearLayout
-            android:id="@+id/pictures_layout"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:gravity="center"
+            android:orientation="vertical">
 
-            <ImageButton
-                android:id="@+id/add_profile_picture"
-                android:layout_width="125dp"
-                android:layout_height="125dp"
-                android:scaleType="fitXY"
-                app:srcCompat="@drawable/add_image" />
+            <ImageSwitcher
+                android:id="@+id/image"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Previous" />
+
+                <Button
+                    android:id="@+id/right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Next" />
+            </LinearLayout>
         </LinearLayout>
 
         <TextView
@@ -64,6 +84,20 @@
             android:inputType="textEmailAddress" />
 
         <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Age (Years):" />
+
+        <EditText
+            android:id="@+id/date_of_birth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="18"
+            android:inputType="textPersonName" />
+
+        <TextView
             android:id="@+id/bio_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -72,7 +106,7 @@
         <EditText
             android:id="@+id/bio"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="100dp"
             android:ems="10"
             android:gravity="left"
             android:hint="ex: Let's party together :)"
@@ -91,10 +125,9 @@
             android:orientation="horizontal"></LinearLayout>
 
         <Button
-            android:id="@+id/submit"
+            android:id="@+id/setup_profile_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="submitProfile"
             android:text="Submit Changes" />
 
     </LinearLayout>

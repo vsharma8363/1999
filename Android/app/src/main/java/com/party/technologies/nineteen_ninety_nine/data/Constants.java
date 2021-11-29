@@ -7,7 +7,9 @@ public class Constants {
     public static final String EXCEEDED_SERVER_REQUESTS_MSG = "SMS server quota has been exceeded";
     public static final String INCORRECT_VERIFICATION_MSG = "Incorrect verification code";
     // SetupProfile.java
-    public static final String INVALID_FULL_NAME_MSG = "Test";
-    public static final String INVALID_EMAIL_MSG = "";
-    public static final String INVALID_BIO_MSG = "";
+    public static final String INVALID_FULL_NAME_MSG = "Please enter your full name!";
+    public static final String INVALID_EMAIL_MSG = "Please enter your email!";
+    public static final String INVALID_BIO_MSG = "Please write a bio!";
+    public static final String INVALID_IMAGES_MSG = "Please select a profile picture!";
+    public static final String INVALID_IG = "Please connect your instagram!";
 }

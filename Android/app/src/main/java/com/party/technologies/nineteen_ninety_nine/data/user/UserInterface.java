@@ -1,7 +1,15 @@
 package com.party.technologies.nineteen_ninety_nine.data.user;
 
+import android.app.ProgressDialog;
+import android.net.Uri;
+import android.text.style.IconMarginSpan;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -12,10 +20,14 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.party.technologies.nineteen_ninety_nine.data.party.Party;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.UUID;
 
 public class UserInterface {
 
@@ -26,6 +38,9 @@ public class UserInterface {
     private static boolean allUsersInitialized;
     private static CollectionReference usersCollection;
     private static ArrayList<User> allUsers;
+    private static String igUserName;
+    private static StorageReference storageReference;
+    private static ArrayList<String> profilePictures;
 
     public static void initialize(FirebaseUser firebaseUser) {
         currentUserInitialized = false;
@@ -33,6 +48,8 @@ public class UserInterface {
         fbUser = firebaseUser;
         usersCollection = FirebaseFirestore.getInstance().collection("users");
         userRef = usersCollection.document(fbUser.getUid());
+        profilePictures = new ArrayList<String>();
+        storageReference = FirebaseStorage.getInstance().getReference();
         launchBackgroundUpdater();
     }
 
@@ -75,6 +92,7 @@ public class UserInterface {
     public static void setupNewUser() {
         User newUser = new User(fbUser.getUid(), fbUser.getPhoneNumber());
         currentUser = newUser;
+        currentUser.setProfilePictures(profilePictures);
         userRef.set(newUser);
     }
 
@@ -104,4 +122,44 @@ public class UserInterface {
         }
         return null;
     }
+
+    public static String getInstagramUserName() {
+        return igUserName;
+    }
+
+    public static void setInstagramUserName(String userName) {
+        igUserName = userName;
+    }
+
+    public static void uploadImage(Uri filePath)
+    {
+        String imagePathFB = "images/" + UUID.randomUUID().toString();
+        profilePictures.add(imagePathFB);
+        StorageReference ref
+                    = storageReference
+                    .child(
+                            imagePathFB);
+
+            // adding listeners on upload
+            // or failure of image
+            ref.putFile(filePath)
+                    .addOnSuccessListener(
+                            new OnSuccessListener<UploadTask.TaskSnapshot>() {
+
+                                @Override
+                                public void onSuccess(
+                                        UploadTask.TaskSnapshot taskSnapshot)
+                                {
+
+                                }
+                            })
+
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e)
+                        {
+
+                        }
+                    });
+        }
 }

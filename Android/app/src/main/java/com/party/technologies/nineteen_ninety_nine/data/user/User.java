@@ -8,6 +8,8 @@ public class User {
     private String fullName;
     private String email;
     private String bio;
+    private ArrayList<String> profilePictures;
+    private int age;
 
     public String getInstagramUserName() {
         return instagramUserName;
@@ -91,4 +93,19 @@ public class User {
         this.bio = bio;
     }
 
+    public void setProfilePictures(ArrayList<String> profilePictures) {
+        this.profilePictures = profilePictures;
+    }
+
+    public ArrayList<String> getProfilePictures() {
+        return this.profilePictures;
+    }
+
+    public void setAge(String age) {
+        this.age = Integer.parseInt(age);
+    }
+
+    public int getAge() {
+        return this.age;
+    }
 }
