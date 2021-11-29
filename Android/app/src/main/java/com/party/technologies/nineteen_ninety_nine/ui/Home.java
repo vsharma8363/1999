@@ -5,8 +5,12 @@ import static android.content.ContentValues.TAG;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
+import com.google.android.gms.maps.GoogleMap.OnMyLocationClickListener;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.Circle;
@@ -15,6 +19,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.party.technologies.nineteen_ninety_nine.R;
 import com.party.technologies.nineteen_ninety_nine.data.party.Party;
 import com.party.technologies.nineteen_ninety_nine.data.party.PartyInterface;
@@ -24,14 +29,25 @@ import com.party.technologies.nineteen_ninety_nine.ui.profile.ProfileActivity;
 import com.party.technologies.nineteen_ninety_nine.ui.pages.Settings;
 import com.party.technologies.nineteen_ninety_nine.ui.upcoming.UpcomingActivity;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import android.widget.Toast;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,6 +55,11 @@ import java.util.Map;
 public class Home extends AppCompatActivity implements OnMapReadyCallback {
 
     private Map<Marker, String> markersPartyHashMap = new HashMap<Marker, String>();
+    private FusedLocationProviderClient fusedLocationClient;
+
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+    private boolean permissionDenied = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +101,8 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
     }
 
     @Override
@@ -101,7 +124,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
     }
 
     private void populateMapWithParties(GoogleMap googleMap) {
-        for(Party party: PartyInterface.getAllParties()) {
+        for (Party party : PartyInterface.getAllParties()) {
             LatLng partyLocation = new LatLng(party.getLatitude(), party.getLongitude());
             MarkerOptions markerOptions = new MarkerOptions()
                     .position(partyLocation)
@@ -116,7 +139,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
             @Override
             public void onInfoWindowClick(@NonNull Marker marker) {
                 String selectedPartyID = markersPartyHashMap.get(marker);
-                if(PartyInterface.getPartyByID(selectedPartyID).getHostID().equals(UserInterface.getCurrentUserUID()))
+                if (PartyInterface.getPartyByID(selectedPartyID).getHostID().equals(UserInterface.getCurrentUserUID()))
                     Toast.makeText(getApplicationContext(), "That's your party you silly goose! \uD80C\uDD6C", Toast.LENGTH_SHORT).show();
                 else {
                     Intent i = new Intent(Home.this, ViewParty.class);
@@ -127,9 +150,45 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
         });
     }
 
+
     private void setMapOriginView(GoogleMap googleMap) {
-        LatLng WSP = new LatLng(40.7309, -73.9973);
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(WSP, 16));
+
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        googleMap.setMyLocationEnabled(true);
+
+        fusedLocationClient.getLastLocation()
+                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        // Got last known location. In some rare situations this can be null.
+                        if (location != null) {
+                            LatLng myLocation = new LatLng(location.getLatitude(),
+                                    location.getLongitude());
+                            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 16));
+                            // Logic to handle location object
+
+                        }
+                        else{
+                            LatLng WSP = new LatLng(40.7309, -73.9973);
+                            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(WSP, 16));
+                        }
+                    }
+                });
+
+
+
+
+
     }
 
     // This method returns a LatLng randomly changed by a max of variationMeters from the original
