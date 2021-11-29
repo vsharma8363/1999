@@ -19,14 +19,14 @@
             android:layout_height="wrap_content"
             android:text="Time to party, fill out your event details below!" />
 
-        <ScrollView
+        <HorizontalScrollView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
 
             <LinearLayout
                 android:id="@+id/party_images"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -38,7 +38,7 @@
 
             </LinearLayout>
 
-        </ScrollView>
+        </HorizontalScrollView>
 
         <TextView
             android:layout_width="match_parent"
@@ -52,18 +52,6 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:hint="ex: Miley's Halloween Bash!" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Party Type/Category:" />
-
-        <Spinner
-            android:id="@+id/party_type"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:drawable/btn_dropdown"
-            android:spinnerMode="dropdown"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -108,7 +96,15 @@
             android:id="@+id/done_editing_party"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Done" />
+            android:text="Let's go!" />
+
+        <TextView
+            android:id="@+id/delete_party"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Delete Party   X"
+            android:textColor="@android:color/holo_red_dark" />
 
 
     </LinearLayout>

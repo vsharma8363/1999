@@ -22,6 +22,7 @@
         <entry key="app/src/main/res/layout/activity_view_party.xml" value="0.19166666666666668" />
         <entry key="app/src/main/res/layout/fragment_create_edit_party.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_create_party.xml" value="0.15364583333333334" />
+        <entry key="app/src/main/res/layout/fragment_edit_party.xml" value="0.2966485507246377" />
         <entry key="app/src/main/res/layout/fragment_hosting.xml" value="0.11474164133738601" />
         <entry key="app/src/main/res/layout/fragment_hosting_already.xml" value="0.22083333333333333" />
         <entry key="app/src/main/res/layout/fragment_hosting_new_party.xml" value="0.15364583333333334" />

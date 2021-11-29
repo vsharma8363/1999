@@ -57,7 +57,7 @@ public class HostViewFragment extends Fragment {
         view.findViewById(R.id.hosting_edit_party).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fragmentTransaction.replace(R.id.hosting_fragment_view, new EditPartyFragment()).commit();
+                fragmentTransaction.replace(R.id.hosting_fragment_view, new CreatePartyFragment()).commit();
             }
         });
         // Populate party information on screen.

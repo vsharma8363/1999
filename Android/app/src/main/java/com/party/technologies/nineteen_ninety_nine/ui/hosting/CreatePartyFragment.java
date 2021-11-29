@@ -28,6 +28,7 @@ import com.party.technologies.nineteen_ninety_nine.R;
 import com.party.technologies.nineteen_ninety_nine.data.party.Party;
 import com.party.technologies.nineteen_ninety_nine.data.party.PartyInterface;
 import com.party.technologies.nineteen_ninety_nine.data.user.UserInterface;
+import com.party.technologies.nineteen_ninety_nine.ui.Home;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +63,7 @@ public class CreatePartyFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_create_party, container, false);
+        Party currentParty = PartyInterface.getPartyByHost(UserInterface.getCurrentUserUID());
         partyImages = new ArrayList<Uri>();
         // Define all displays
         name = view.findViewById(R.id.party_name);
@@ -82,6 +84,23 @@ public class CreatePartyFragment extends Fragment {
             }
         });
 
+        if(currentParty != null) {
+            name.setText(currentParty.getPartyName());
+            description.setText(currentParty.getPartyDescription());
+            address.setText(currentParty.getAddress());
+            apartment_unit.setText(currentParty.getApartment_unit());
+            view.findViewById(R.id.delete_party).setVisibility(View.VISIBLE);
+            view.findViewById(R.id.delete_party).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    PartyInterface.deleteParty(currentParty.getPartyID());
+                    startActivity(new Intent(getContext(), Home.class));
+                }
+            });
+        }
+        else
+            view.findViewById(R.id.delete_party).setVisibility(View.INVISIBLE);
+
         // Set submission logic.
         view.findViewById(R.id.done_editing_party).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,16 +111,37 @@ public class CreatePartyFragment extends Fragment {
                     for(Uri uri: partyImages) {
                         PartyInterface.uploadPartyImage(uri);
                     }
-                    // All information is valid, create a new party object
-                    Party newParty = new Party(UserInterface.getCurrentUserUID(),
-                            name.getText().toString(),
-                            description.getText().toString(),
-                            address.getText().toString(),
-                            apartment_unit.getText().toString(),
-                            address_latlng.longitude,
-                            address_latlng.latitude,
-                            PartyInterface.getPartyImages());
-                    PartyInterface.publishParty(newParty);
+
+                    if(currentParty!= null) {
+                        Party updatedParty = PartyInterface.getPartyByHost(UserInterface.getCurrentUserUID());
+                        // All information is valid, create a new party object
+                        updatedParty.setPartyName(name.getText().toString());
+                        updatedParty.setPartyDescription(description.getText().toString());
+                        updatedParty.setAddress(address.getText().toString());
+                        updatedParty.setApartment_unit(apartment_unit.getText().toString());
+                        updatedParty.setLongitude(address_latlng.longitude);
+                        updatedParty.setLatitude(address_latlng.latitude);
+                        PartyInterface.updateParty(updatedParty);
+                        for(String imageURL:currentParty.getPartyImages()) {
+                            ImageView im = new ImageView(getActivity());
+                            im.setLayoutParams(new LinearLayout.LayoutParams(addPartyImage.getWidth(), addPartyImage.getHeight()));
+                            im.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                            partyImageLayout.addView(im);
+                            UserInterface.loadImageToImageView(imageURL, im, getActivity());
+                        }
+                    }
+                    else {
+                        // All information is valid, create a new party object
+                        Party newParty = new Party(UserInterface.getCurrentUserUID(),
+                                name.getText().toString(),
+                                description.getText().toString(),
+                                address.getText().toString(),
+                                apartment_unit.getText().toString(),
+                                address_latlng.longitude,
+                                address_latlng.latitude,
+                                PartyInterface.getPartyImages());
+                        PartyInterface.publishParty(newParty);
+                    }
                     getActivity().getSupportFragmentManager().beginTransaction().replace(
                             R.id.hosting_fragment_view, new HostViewFragment()).commit();
                 }
@@ -176,6 +216,5 @@ public class CreatePartyFragment extends Fragment {
             im.setScaleType(ImageView.ScaleType.FIT_CENTER);
             partyImageLayout.addView(im);
         }
-        partyImageLayout.setScrollBarSize(10);
     }
 }
