@@ -28,6 +28,7 @@
         <entry key="app/src/main/res/layout/fragment_hosting_new_party.xml" value="0.15364583333333334" />
         <entry key="app/src/main/res/layout/fragment_list_upcoming_list.xml" value="0.1828125" />
         <entry key="app/src/main/res/layout/fragment_map.xml" value="0.11474164133738601" />
+        <entry key="app/src/main/res/layout/fragment_pending_guests.xml" value="0.14175724637681159" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.12158054711246201" />
         <entry key="app/src/main/res/layout/fragment_upcoming.xml" value="0.11096014492753623" />

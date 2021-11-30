@@ -14,6 +14,20 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/hosting_party_name"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textSize="14pt"
+            android:text="Party Name" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="What does it look like?" />
+
         <HorizontalScrollView
             android:id="@+id/party_image_scrollable"
             android:layout_width="fill_parent"
@@ -22,45 +36,37 @@
         </HorizontalScrollView>
 
         <TextView
-            android:id="@+id/hosting_party_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Party Name" />
-
-        <TextView
             android:id="@+id/hosting_party_description"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:text="TextView" />
 
         <TextView
             android:id="@+id/hosting_party_address"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
-
-        <com.daprlabs.cardstack.SwipeFrameLayout
-            xmlns:swipedeck="http://schemas.android.com/apk/res-auto"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:gravity="center_horizontal"
+            android:text="TextView" />
 
-            <!--below widget is used for creating a swipe deck-->
-            <!--in below widget card spacing is the spacing between cards
-                max visible is the max number of cards which are visible
-                render above is to render the cards
-                rotation degree is the angle of card rotation when card is swiped-->
-            <com.daprlabs.cardstack.SwipeDeck
-                android:id="@+id/swipe_deck"
-                android:layout_width="match_parent"
-                android:layout_height="700dp"
-                android:padding="20dp"
-                swipedeck:card_spacing="10dp"
-                swipedeck:max_visible="3"
-                swipedeck:render_above="true"
-                swipedeck:rotation_degrees="15" />
+        <Button
+            android:id="@+id/screen_guests_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Screen Guests" />
 
-        </com.daprlabs.cardstack.SwipeFrameLayout>
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="The Guest List" />
+
+        <LinearLayout
+            android:id="@+id/guest_list_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"></LinearLayout>
+
         <Button
             android:id="@+id/hosting_edit_party"
             android:layout_width="match_parent"
