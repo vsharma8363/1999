@@ -4,44 +4,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_1999"
     tools:context=".ui.hosting.HostingActivity">
 
     <LinearLayout
-        android:id="@+id/hosting_layout"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:gravity="center|top"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:orientation="vertical">
+
+        <Space
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/top_spacing" />
+
+        <ImageButton
+            android:id="@+id/activity_hosting_done_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            app:srcCompat="@drawable/back" />
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="left">
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical|center_horizontal"
+            android:orientation="vertical">
 
-            <Button
-                android:id="@+id/back_hosting"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Go Back" />
+                android:textSize="10pt"
+                android:gravity="center_horizontal"
+                android:text="Do you want to host a party?" />
 
+            <Space
+                android:layout_width="fill_parent"
+                android:layout_height="40dp" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|center_horizontal"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/yes_host_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Yes" />
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/yes_host_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Yes" />
+
+            </LinearLayout>
         </LinearLayout>
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="50dp" />
-
-        <androidx.fragment.app.FragmentContainerView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/hosting_fragment_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

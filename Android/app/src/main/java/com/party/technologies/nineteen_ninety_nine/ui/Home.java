@@ -9,12 +9,8 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
-import com.google.android.gms.maps.GoogleMap.OnMyLocationClickListener;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.Circle;
-import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
@@ -25,15 +21,14 @@ import com.party.technologies.nineteen_ninety_nine.data.party.Party;
 import com.party.technologies.nineteen_ninety_nine.data.party.PartyInterface;
 import com.party.technologies.nineteen_ninety_nine.data.user.UserInterface;
 import com.party.technologies.nineteen_ninety_nine.ui.hosting.HostingActivity;
+import com.party.technologies.nineteen_ninety_nine.ui.party_viewer.ViewParty;
 import com.party.technologies.nineteen_ninety_nine.ui.profile.ProfileActivity;
 import com.party.technologies.nineteen_ninety_nine.ui.pages.Settings;
 import com.party.technologies.nineteen_ninety_nine.ui.upcoming.UpcomingActivity;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -41,10 +36,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import android.widget.Toast;
 
@@ -59,7 +51,6 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     private boolean permissionDenied = false;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,10 +141,9 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
         });
     }
 
-
     private void setMapOriginView(GoogleMap googleMap) {
-
-
+        LatLng WSP = new LatLng(40.7309, -73.9973);
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(WSP, 16));
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(Home.this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
@@ -161,7 +151,6 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
             return;
         }
         googleMap.setMyLocationEnabled(true);
-
         fusedLocationClient.getLastLocation()
                 .addOnSuccessListener(this, new OnSuccessListener<Location>() {
                     @Override
@@ -174,23 +163,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
                             // Logic to handle location object
 
                         }
-                        else{
-                            LatLng WSP = new LatLng(40.7309, -73.9973);
-                            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(WSP, 16));
-                        }
                     }
                 });
-
-
-
-
-
-    }
-
-    // This method returns a LatLng randomly changed by a max of variationMeters from the original
-    // spot.
-    private LatLng randomizeLatLng(LatLng original, double variationMeters) {
-        // TODO: Implement function to randomize a location.
-        return original;
     }
 }

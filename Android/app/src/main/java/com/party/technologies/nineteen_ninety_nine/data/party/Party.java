@@ -17,6 +17,25 @@ public class Party {
     private Map<String, Object> attributes;
     private ArrayList<String> guestsApproved;
 
+    public long getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(long startTime) {
+        this.startTime = startTime;
+    }
+
+    public long getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(long endTime) {
+        this.endTime = endTime;
+    }
+
+    private long startTime;
+    private long endTime;
+
     public ArrayList<String> getPartyImages() {
         return partyImages;
     }
@@ -62,7 +81,7 @@ public class Party {
         guestsDenied = new ArrayList<String>();
     }
 
-    public Party(String hostID, String name, String description, String address, String apartmentUnit, double longitude, double latitude, ArrayList<String> partyImages) {
+    public Party(String hostID, String name, String description, String address, String apartmentUnit, double longitude, double latitude, ArrayList<String> partyImages, long startTime, long endTime) {
         attributes = new HashMap<String, Object>();
         attributes.put("hostID", hostID);
         attributes.put("partyName", name);
@@ -78,6 +97,8 @@ public class Party {
         guestsPending = new ArrayList<String>();
         guestsDenied = new ArrayList<String>();
         this.partyImages = partyImages;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     public String getHostID() {

@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.hosting.PendingGuestsFragment">
+    tools:context=".ui.party_viewer.ScreenGuests">
 
     <com.daprlabs.cardstack.SwipeFrameLayout
         xmlns:swipedeck="http://schemas.android.com/apk/res-auto"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:orientation="vertical">
 
         <!--below widget is used for creating a swipe deck-->
@@ -18,8 +19,8 @@
             rotation degree is the angle of card rotation when card is swiped-->
         <com.daprlabs.cardstack.SwipeDeck
             android:id="@+id/swipe_deck"
-            android:layout_width="match_parent"
-            android:layout_height="700dp"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
             android:padding="20dp"
             swipedeck:card_spacing="10dp"
             swipedeck:max_visible="3"
@@ -28,4 +29,4 @@
 
     </com.daprlabs.cardstack.SwipeFrameLayout>
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_1999"
-    tools:context=".ui.party_viewer.ViewParty">
+    tools:context=".ui.party_viewer.CreateParty">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
             android:layout_height="@dimen/top_spacing" />
 
         <ImageButton
-            android:id="@+id/activity_view_party_done_btn"
+            android:id="@+id/activity_create_party_done_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
@@ -44,7 +44,7 @@
 
                     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
                         xmlns:tools="http://schemas.android.com/tools"
-                        android:id="@+id/activity_view_party_map"
+                        android:id="@+id/activity_create_party_map"
                         android:name="com.google.android.gms.maps.SupportMapFragment"
                         android:layout_width="fill_parent"
                         android:layout_height="150dp" />
@@ -56,43 +56,69 @@
                     android:layout_height="20dp" />
 
                 <LinearLayout
-                    android:id="@+id/activity_view_party_address_layout"
+                    android:id="@+id/activity_create_party_address_layout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/activity_view_party_address"
+                    <EditText
+                        android:id="@+id/activity_create_party_address"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_horizontal"
                         android:text="Address"
                         android:textSize="9pt" />
 
-                    <TextView
-                        android:id="@+id/activity_view_party_unit"
+                    <LinearLayout
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_horizontal"
-                        android:text="Unit"
-                        android:textSize="9pt" />
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="Unit/Apt:"
+                            android:textSize="9pt" />
+
+                        <EditText
+                            android:id="@+id/activity_create_party_unit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="Unit"
+                            android:textSize="9pt" />
+                    </LinearLayout>
 
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/activity_view_party_date_time"
+                <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:text="Date Time"
-                    android:textSize="9pt" />
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/activity_create_party_date_time_start"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Start Time" />
+
+                    <Button
+                        android:id="@+id/activity_create_party_date_time_end"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="End Time" />
+                </LinearLayout>
 
                 <Space
                     android:layout_width="match_parent"
                     android:layout_height="20dp" />
 
-                <TextView
-                    android:id="@+id/activity_view_party_name"
+                <EditText
+                    android:id="@+id/activity_create_party_name"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
@@ -103,8 +129,8 @@
                     android:layout_width="fill_parent"
                     android:layout_height="20dp" />
 
-                <TextView
-                    android:id="@+id/activity_view_party_description"
+                <EditText
+                    android:id="@+id/activity_create_party_description"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
@@ -118,47 +144,27 @@
                     android:layout_height="20dp" />
 
                 <Button
-                    android:id="@+id/activity_view_party_request_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Apply for Attendance" />
-
-                <Space
+                    android:id="@+id/activity_create_party_submit"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp" />
-
-                <Button
-                    android:id="@+id/activity_view_party_screen_guests_btn"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Screen Guests" />
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp" />
-
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:textSize="8pt"
-                    android:text="Guest List" />
-
-                <LinearLayout
-                    android:id="@+id/activity_view_party_guest_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"></LinearLayout>
-
-                <Space
-                    android:layout_width="fill_parent"
-                    android:layout_height="20dp" />
+                    android:text="Submit" />
 
                 <HorizontalScrollView
-                    android:id="@+id/activity_view_party_images_scrollview"
+                    android:id="@+id/activity_create_party_images_scrollview"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent">
+
+                </HorizontalScrollView>
+
+                <TextView
+                    android:id="@+id/activity_create_delete_party_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Delete Party   X" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp" />
 
 
             </LinearLayout>

@@ -21,14 +21,13 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         // Define back button logic.
-        Button back = findViewById(R.id.back_profile);
-        back.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.activity_profile_done_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), Home.class));
+               finish();
             }
         });
         getSupportFragmentManager().beginTransaction().replace(
-                R.id.profile_fragment_view, new ProfileFragment()).commit();
+                R.id.activity_profile_fragment_view, new ProfileFragment()).commit();
     }
 }
