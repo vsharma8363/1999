@@ -1,7 +1,9 @@
 package com.party.technologies.nineteen_ninety_nine.ui.profile;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -18,6 +20,7 @@ import com.party.technologies.nineteen_ninety_nine.data.user.UserInterface;
 import com.party.technologies.nineteen_ninety_nine.social.InstagramScreen;
 import com.party.technologies.nineteen_ninety_nine.ui.Home;
 import com.party.technologies.nineteen_ninety_nine.ui.SetupProfile;
+import com.party.technologies.nineteen_ninety_nine.ui.party_viewer.ViewParty;
 
 public class ProfileFragment extends Fragment {
 
@@ -54,7 +57,22 @@ public class ProfileFragment extends Fragment {
         Button instagramButton = view.findViewById(R.id.connect_to_instagram);
         instagramButton.setText("@" + UserInterface.getCurrentUser().getInstagramUserName());
         instagramButton.setBackgroundColor(Color.CYAN);
-        instagramButton.setClickable(false);
+        instagramButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uri = Uri.parse("http://instagram.com/_u/" + UserInterface.getCurrentUser().getInstagramUserName());
+                Intent likeIng = new Intent(Intent.ACTION_VIEW, uri);
+
+                likeIng.setPackage("com.instagram.android");
+
+                try {
+                    getActivity().startActivity(likeIng);
+                } catch (ActivityNotFoundException e) {
+                    getActivity().startActivity(new Intent(Intent.ACTION_VIEW,
+                            Uri.parse("http://instagram.com/" + UserInterface.getCurrentUser().getInstagramUserName())));
+                }
+            }
+        });
         return view;
     }
 }

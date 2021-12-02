@@ -227,9 +227,9 @@ public class ViewParty extends AppCompatActivity implements OnMapReadyCallback {
                     likeIng.setPackage("com.instagram.android");
 
                     try {
-                        getApplicationContext().startActivity(likeIng);
+                        ViewParty.this.startActivity(likeIng);
                     } catch (ActivityNotFoundException e) {
-                        getApplicationContext().startActivity(new Intent(Intent.ACTION_VIEW,
+                        ViewParty.this.startActivity(new Intent(Intent.ACTION_VIEW,
                                 Uri.parse("http://instagram.com/" + guest.getInstagramUserName())));
                     }
                 }
