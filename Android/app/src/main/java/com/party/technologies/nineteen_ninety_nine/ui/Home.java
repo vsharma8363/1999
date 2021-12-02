@@ -38,6 +38,7 @@ import android.widget.Button;
 
 import androidx.core.app.ActivityCompat;
 
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 
@@ -57,7 +58,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         // Define profile button logic.
-        Button profile = findViewById(R.id.profile_button);
+        ImageButton profile = findViewById(R.id.profile_button);
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,7 +66,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
             }
         });
         // Define hosting button logic.
-        Button hosting = findViewById(R.id.hosting_button);
+        ImageButton hosting = findViewById(R.id.hosting_button);
         hosting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,7 +74,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
             }
         });
         // Define settings button logic.
-        Button settings = findViewById(R.id.settings_button);
+        ImageButton settings = findViewById(R.id.settings_button);
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,7 +82,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
             }
         });
         // Define settings button logic.
-        Button upcoming = findViewById(R.id.upcoming_button);
+        ImageButton upcoming = findViewById(R.id.upcoming_button);
         upcoming.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

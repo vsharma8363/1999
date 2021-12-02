@@ -18,8 +18,9 @@
 
         <ImageButton
             android:id="@+id/activity_create_party_done_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:scaleType="fitXY"
             android:background="@null"
             app:srcCompat="@drawable/back" />
 
