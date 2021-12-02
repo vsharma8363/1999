@@ -48,6 +48,7 @@ public class Splash extends Activity {
                 }finally{
                 }
                 Splash.this.startActivity(nextPage);
+                Splash.this.finish();
             }
         };
         checkUserSleepThread.start();
