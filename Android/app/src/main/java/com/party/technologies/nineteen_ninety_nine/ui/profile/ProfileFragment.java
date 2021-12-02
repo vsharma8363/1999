@@ -43,13 +43,13 @@ public class ProfileFragment extends Fragment {
                 view.findViewById(R.id.profile_pic_view),
                 getActivity());
         TextView fullName = view.findViewById(R.id.full_name);
-        fullName.setText(user.getFullName() + "\n");
+        fullName.setText(user.getFullName());
         TextView phoneNumber = view.findViewById(R.id.phone_number);
-        phoneNumber.setText(user.getPhoneNumber() + "\n");
+        phoneNumber.setText(user.getPhoneNumber());
         TextView email = view.findViewById(R.id.email);
-        email.setText(user.getEmail() + "\n");
+        email.setText(user.getEmail());
         TextView bio = view.findViewById(R.id.bio);
-        bio.setText(user.getBio() + "\n");
+        bio.setText(user.getBio());
         // Connect to instagram
         Button instagramButton = view.findViewById(R.id.connect_to_instagram);
         instagramButton.setText("@" + UserInterface.getCurrentUser().getInstagramUserName());
