@@ -23,6 +23,13 @@ public class ScreenGuests extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_screen_guests);
+        // Define back button logic.
+        findViewById(R.id.activity_screen_guests_done_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         populateGuestScreeningView(PartyInterface.getPartyByHost(UserInterface.getCurrentUserUID()));
     }
 
@@ -44,7 +51,7 @@ public class ScreenGuests extends AppCompatActivity {
             profiles.add(profile);
         }
 
-        final UserAdapter adapter = new UserAdapter(profiles, getApplicationContext());
+        final UserAdapter adapter = new UserAdapter(profiles);
 
         // on below line we are setting adapter to our card stack.
         cardStack.setAdapter(adapter);

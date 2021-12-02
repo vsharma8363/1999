@@ -35,10 +35,10 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/filter_map"
+                android:id="@+id/upcoming_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Filter" />
+                android:text="Upcoming" />
 
             <Space
                 android:layout_width="wrap_content"
@@ -65,25 +65,16 @@
                 android:layout_height="wrap_content"
                 android:text="Host" />
 
-            <Button
-                android:id="@+id/list_button"
+            <Space
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="List" />
-
-            <Button
-                android:id="@+id/upcoming_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Upcoming" />
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
 
             <Button
                 android:id="@+id/profile_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Profile" />
-
         </LinearLayout>
 
     </FrameLayout>

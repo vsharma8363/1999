@@ -22,12 +22,10 @@ public class UserAdapter extends BaseAdapter {
     // on below line we have created variables
     // for our array list and context.
     private ArrayList<UserProfile> profiles;
-    private Context context;
 
     // on below line we have created constructor for our variables.
-    public UserAdapter(ArrayList<UserProfile> profile, Context context) {
+    public UserAdapter(ArrayList<UserProfile> profile) {
         this.profiles = profile;
-        this.context = context;
     }
 
     @Override
@@ -71,14 +69,14 @@ public class UserAdapter extends BaseAdapter {
                 likeIng.setPackage("com.instagram.android");
 
                 try {
-                    context.startActivity(likeIng);
+                    parent.getContext().startActivity(likeIng);
                 } catch (ActivityNotFoundException e) {
-                    context.startActivity(new Intent(Intent.ACTION_VIEW,
+                    parent.getContext().startActivity(new Intent(Intent.ACTION_VIEW,
                             Uri.parse("http://instagram.com/" + up.getInstagramUserName())));
                 }
             }
         });
-        UserInterface.loadImageToImageView(up.getImage(), (ImageView) v.findViewById(R.id.profile_img), context);
+        UserInterface.loadImageToImageView(up.getImage(), (ImageView) v.findViewById(R.id.profile_img), parent.getContext());
         return v;
     }
 }

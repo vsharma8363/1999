@@ -90,11 +90,13 @@ public class CreateParty extends AppCompatActivity implements OnMapReadyCallback
                 if (!hasFocus) {
                     if (map != null) {
                         address_latlng = getLocationFromAddress(getApplicationContext(), address.getText().toString());
-                        // Party is being edited
-                        map.clear();
-                        MarkerOptions markerOptions = new MarkerOptions().position(address_latlng);
-                        map.addMarker(markerOptions);
-                        map.moveCamera(CameraUpdateFactory.newLatLngZoom(address_latlng, 17));
+                        if (address_latlng != null) {
+                            // Party is being edited
+                            map.clear();
+                            MarkerOptions markerOptions = new MarkerOptions().position(address_latlng);
+                            map.addMarker(markerOptions);
+                            map.moveCamera(CameraUpdateFactory.newLatLngZoom(address_latlng, 17));
+                        }
                     }
                 }
             }

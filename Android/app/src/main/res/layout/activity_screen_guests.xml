@@ -4,29 +4,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_1999"
     tools:context=".ui.party_viewer.ScreenGuests">
 
-    <com.daprlabs.cardstack.SwipeFrameLayout
-        xmlns:swipedeck="http://schemas.android.com/apk/res-auto"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!--below widget is used for creating a swipe deck-->
-        <!--in below widget card spacing is the spacing between cards
+        <Space
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/top_spacing" />
+
+        <ImageButton
+            android:id="@+id/activity_screen_guests_done_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            app:srcCompat="@drawable/back" />
+
+        <Space
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/top_spacing" />
+
+        <com.daprlabs.cardstack.SwipeFrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <!--below widget is used for creating a swipe deck-->
+            <!--in below widget card spacing is the spacing between cards
             max visible is the max number of cards which are visible
             render above is to render the cards
             rotation degree is the angle of card rotation when card is swiped-->
-        <com.daprlabs.cardstack.SwipeDeck
-            android:id="@+id/swipe_deck"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:padding="20dp"
-            swipedeck:card_spacing="10dp"
-            swipedeck:max_visible="3"
-            swipedeck:render_above="true"
-            swipedeck:rotation_degrees="15" />
+            <com.daprlabs.cardstack.SwipeDeck
+                android:id="@+id/swipe_deck"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:padding="20dp"
+                app:card_spacing="10dp"
+                app:max_visible="3"
+                app:render_above="true"
+                app:rotation_degrees="15" />
 
-    </com.daprlabs.cardstack.SwipeFrameLayout>
+        </com.daprlabs.cardstack.SwipeFrameLayout>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
