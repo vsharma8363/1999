@@ -63,6 +63,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                overridePendingTransition( R.anim.slide_in, R.anim.slide_out );
             }
         });
         // Define hosting button logic.
@@ -71,6 +72,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), HostingActivity.class));
+                overridePendingTransition( R.anim.slide_in, R.anim.slide_out );
             }
         });
         // Define settings button logic.
@@ -79,6 +81,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), Settings.class));
+                overridePendingTransition( R.anim.slide_in, R.anim.slide_out );
             }
         });
         // Define settings button logic.
@@ -87,6 +90,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), UpcomingActivity.class));
+                overridePendingTransition( R.anim.slide_in, R.anim.slide_out );
             }
         });
 
