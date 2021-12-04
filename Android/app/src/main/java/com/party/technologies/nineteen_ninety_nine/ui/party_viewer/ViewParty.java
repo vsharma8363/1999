@@ -11,9 +11,11 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
@@ -51,6 +53,7 @@ public class ViewParty extends AppCompatActivity implements OnMapReadyCallback {
     private TextView partyAddress;
     private TextView partyUnit;
     private LinearLayout guest_list_layout;
+    private Button screenGuests;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +99,7 @@ public class ViewParty extends AppCompatActivity implements OnMapReadyCallback {
         partyUnit.setText("Unit/Apt: " + party.getApartment_unit());
         // Apply for attendance
         Button applyForAttendance = findViewById(R.id.activity_view_party_request_btn);
-        Button screenGuests = findViewById(R.id.activity_view_party_screen_guests_btn);
+        screenGuests = findViewById(R.id.activity_view_party_screen_guests_btn);
         screenGuests.setVisibility(INVISIBLE);
         if (party.getGuestsPending().contains(UserInterface.getCurrentUserUID())) {
             // Guest is waiting approval
@@ -160,6 +163,8 @@ public class ViewParty extends AppCompatActivity implements OnMapReadyCallback {
             @Override
             public void onClick(View v) {
                 finish();
+                overridePendingTransition(R.anim.slide_in_left,
+                        R.anim.slide_out_right);
             }
         });
         mapFragment.getMapAsync(ViewParty.this);
@@ -206,56 +211,108 @@ public class ViewParty extends AppCompatActivity implements OnMapReadyCallback {
         guest_list_layout.removeAllViews();
         // Add all guests to the list:
         ArrayList<User> acceptedGuests = new ArrayList<User>();
+        acceptedGuests.add(UserInterface.getUser(party.getHostID()));
         for(String UID:hostingParty.getGuestsApproved())
             acceptedGuests.add(UserInterface.getUser(UID));
+        if(party.getHostID().equals(UserInterface.getCurrentUserUID())) {
+            for(String UID:hostingParty.getGuestsDenied())
+                acceptedGuests.add(UserInterface.getUser(UID));
+        }
 
         for(User guest:acceptedGuests) {
-            TextView guestName = new TextView(getApplicationContext());
-            //name.setWidth(guest_list_layout.getWidth());
-            guestName.setText(guest.getFullName());
+            if(party.getHostID().equals(UserInterface.getCurrentUserUID()) ||
+                    party.getGuestsApproved().contains(guest.getUID()) ||
+            party.getHostID().equals(guest.getUID())) {
+                TextView guestName = new TextView(getApplicationContext());
+                //name.setWidth(guest_list_layout.getWidth());
+                guestName.setText(guest.getFullName());
 
-            TextView instagramID = new TextView(getApplicationContext());
-            //instagramID.setWidth(guest_list_layout.getWidth());
-            instagramID.setText("@" + guest.getInstagramUserName());
-            instagramID.setTextColor(Color.BLUE);
-            instagramID.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Uri uri = Uri.parse("http://instagram.com/_u/" + guest.getInstagramUserName());
-                    Intent likeIng = new Intent(Intent.ACTION_VIEW, uri);
+                TextView instagramID = new TextView(getApplicationContext());
+                //instagramID.setWidth(guest_list_layout.getWidth());
+                instagramID.setText("@" + guest.getInstagramUserName());
+                instagramID.setTextColor(Color.BLUE);
+                instagramID.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Uri uri = Uri.parse("http://instagram.com/_u/" + guest.getInstagramUserName());
+                        Intent likeIng = new Intent(Intent.ACTION_VIEW, uri);
 
-                    likeIng.setPackage("com.instagram.android");
+                        likeIng.setPackage("com.instagram.android");
 
-                    try {
-                        ViewParty.this.startActivity(likeIng);
-                    } catch (ActivityNotFoundException e) {
-                        ViewParty.this.startActivity(new Intent(Intent.ACTION_VIEW,
-                                Uri.parse("http://instagram.com/" + guest.getInstagramUserName())));
+                        try {
+                            ViewParty.this.startActivity(likeIng);
+                        } catch (ActivityNotFoundException e) {
+                            ViewParty.this.startActivity(new Intent(Intent.ACTION_VIEW,
+                                    Uri.parse("http://instagram.com/" + guest.getInstagramUserName())));
+                        }
                     }
+                });
+                ImageView profilePicture = new ImageView(getApplicationContext());
+                UserInterface.loadImageToImageView(guest.getProfilePicture(), profilePicture, getApplicationContext());
+                profilePicture.setLayoutParams(new LinearLayout.LayoutParams(200, 200));
+                LinearLayout overallBar = new LinearLayout(getApplicationContext());
+                overallBar.setOrientation(LinearLayout.HORIZONTAL);
+                overallBar.addView(profilePicture);
+                Space space = new Space(getApplicationContext());
+                space.setLayoutParams(new LinearLayout.LayoutParams(50, 20));
+                overallBar.addView(space);
+                LinearLayout dataBar = new LinearLayout(getApplicationContext());
+                dataBar.setOrientation(LinearLayout.VERTICAL);
+                dataBar.addView(guestName);
+                if (party.getGuestsApproved().contains(UserInterface.getCurrentUserUID()) ||
+                        party.getHostID().equals(UserInterface.getCurrentUserUID())) {
+                    // You can view other peoples phone numbers if you have been approved.
+                    TextView phoneNumber = new TextView(getApplicationContext());
+                    phoneNumber.setText(guest.getPhoneNumber());
+                    dataBar.addView(phoneNumber);
                 }
-            });
-            ImageView profilePicture = new ImageView(getApplicationContext());
-            UserInterface.loadImageToImageView(guest.getProfilePicture(), profilePicture, getApplicationContext());
-            profilePicture.setLayoutParams(new LinearLayout.LayoutParams(200, 200));
-            LinearLayout overallBar = new LinearLayout(getApplicationContext());
-            overallBar.setOrientation(LinearLayout.HORIZONTAL);
-            overallBar.addView(profilePicture);
-            Space space = new Space(getApplicationContext());
-            space.setLayoutParams(new LinearLayout.LayoutParams(50, 20));
-            overallBar.addView(space);
-            LinearLayout dataBar = new LinearLayout(getApplicationContext());
-            dataBar.setOrientation(LinearLayout.VERTICAL);
-            dataBar.addView(guestName);
-            if (party.getGuestsApproved().contains(UserInterface.getCurrentUserUID()) ||
-                party.getHostID().equals(UserInterface.getCurrentUserUID())) {
-                TextView phoneNumber = new TextView(getApplicationContext());
-                phoneNumber.setText(guest.getPhoneNumber());
-                dataBar.addView(phoneNumber);
+                dataBar.addView(instagramID);
+                overallBar.addView(dataBar);
+                if (guest.getUID().equals(party.getHostID())) {
+                    overallBar.setBackgroundColor(Color.parseColor("#00bcd4"));
+                    TextView hostName = new TextView(getApplicationContext());
+                    hostName.setTextSize(25f);
+                    hostName.setTextColor(Color.GRAY);
+                    hostName.setText("    HOST");
+                    hostName.setGravity(Gravity.RIGHT);
+                    Space s = new Space(getApplicationContext());
+                    overallBar.addView(s);
+                    overallBar.addView(hostName);
+                }
+                else if (party.getGuestsApproved().contains(guest.getUID()))
+                    overallBar.setBackgroundColor(Color.parseColor("#90ee90"));
+                else if (party.getGuestsDenied().contains(guest.getUID()))
+                    overallBar.setBackgroundColor(Color.parseColor("#a53434"));
+                // Reconsider button logic
+                if (!guest.getUID().equals(party.getHostID()) &&
+                        party.getHostID().equals(UserInterface.getCurrentUserUID())) {
+                    ImageButton reconsider = new ImageButton(getApplicationContext());
+                    reconsider.setImageDrawable(getResources().getDrawable(R.drawable.redo));
+                    reconsider.setLayoutParams(new LinearLayout.LayoutParams(200, 200));
+                    reconsider.setScaleType(ImageView.ScaleType.FIT_XY);
+                    reconsider.setBackgroundResource(0);
+                    reconsider.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            party.addPendingGuest(guest.getUID());
+                            PartyInterface.updateParty(party);
+                            populateGuestList(party);
+                            if (party.getGuestsPending().size() > 0) {
+                                screenGuests.setText("Screen Guests (" + party.getGuestsPending().size() + ") waiting");
+                                screenGuests.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        finish();
+                                        startActivity(new Intent(getApplicationContext(), ScreenGuests.class));
+                                    }
+                                });
+                            }
+                        }
+                    });
+                    overallBar.addView(reconsider);
+                }
+                guest_list_layout.addView(overallBar);
             }
-            dataBar.addView(instagramID);
-            overallBar.addView(dataBar);
-            overallBar.setBackgroundColor(Color.parseColor("#90ee90"));
-            guest_list_layout.addView(overallBar);
         }
     }
 }

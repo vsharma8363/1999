@@ -27,6 +27,8 @@ public class HostingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+                overridePendingTransition(R.anim.slide_in_left,
+                        R.anim.slide_out_right);
             }
         });
         // Decide which fragment to load on screen startup.

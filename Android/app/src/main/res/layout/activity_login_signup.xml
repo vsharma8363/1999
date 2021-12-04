@@ -4,17 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_1999"
     tools:context=".ui.LoginSignup">
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:gravity="center"
+        android:gravity="center|bottom"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="8pt"
+            android:gravity="center_horizontal"
+            android:text="Enter your number to get started!" />
 
         <net.rimoto.intlphoneinput.IntlPhoneInput
             android:id="@+id/phone_number_signup"
@@ -25,11 +33,17 @@
             android:inputType="phone">
         </net.rimoto.intlphoneinput.IntlPhoneInput>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageButton
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:scaleType="fitXY"
+            android:background="@null"
             android:onClick="signUp"
-            android:text="->" />
+            android:src="@drawable/login" />
+
+        <Space
+            android:layout_width="fill_parent"
+            android:layout_height="20dp" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

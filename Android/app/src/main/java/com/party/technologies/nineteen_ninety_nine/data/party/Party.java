@@ -166,27 +166,28 @@ public class Party {
 
 
     public void addApprovedGuest(String UID) {
-        if(this.guestsPending.contains(UID))
-            this.guestsPending.remove(UID);
-        if(this.guestsDenied.contains(UID))
-            this.guestsDenied.remove(UID);
+        removeFromArrayList(this.guestsDenied, UID);
+        removeFromArrayList(this.guestsPending, UID);
+        removeFromArrayList(this.guestsApproved, UID);
         this.guestsApproved.add(UID);
     }
 
 
     public void addPendingGuest(String UID) {
-        if(this.guestsDenied.contains(UID))
-            this.guestsDenied.remove(UID);
-        if(this.guestsApproved.contains(UID))
-            this.guestsApproved.remove(UID);
+        removeFromArrayList(this.guestsDenied, UID);
+        removeFromArrayList(this.guestsPending, UID);
+        removeFromArrayList(this.guestsApproved, UID);
         this.guestsPending.add(UID);
     }
 
     public void addDeniedGuest(String UID) {
-        if(this.guestsPending.contains(UID))
-            this.guestsPending.remove(UID);
-        if(this.guestsApproved.contains(UID))
-            this.guestsApproved.remove(UID);
+        removeFromArrayList(this.guestsDenied, UID);
+        removeFromArrayList(this.guestsPending, UID);
+        removeFromArrayList(this.guestsApproved, UID);
         this.guestsDenied.add(UID);
+    }
+
+    public void removeFromArrayList(ArrayList<String> list, String string) {
+        while(list.remove(string)) {}
     }
 }

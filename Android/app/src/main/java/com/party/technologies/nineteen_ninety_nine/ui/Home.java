@@ -34,7 +34,6 @@ import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 
 import androidx.core.app.ActivityCompat;
 
@@ -63,7 +62,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
-                overridePendingTransition( R.anim.slide_in, R.anim.slide_out );
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
         // Define hosting button logic.
@@ -72,7 +71,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), HostingActivity.class));
-                overridePendingTransition( R.anim.slide_in, R.anim.slide_out );
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
         // Define settings button logic.
@@ -81,7 +80,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), Settings.class));
-                overridePendingTransition( R.anim.slide_in, R.anim.slide_out );
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
         // Define settings button logic.
@@ -90,7 +89,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), UpcomingActivity.class));
-                overridePendingTransition( R.anim.slide_in, R.anim.slide_out );
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
 

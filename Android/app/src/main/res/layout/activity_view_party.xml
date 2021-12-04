@@ -101,6 +101,11 @@
                     android:textSize="14pt" />
 
                 <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
+
+
+                <Space
                     android:layout_width="fill_parent"
                     android:layout_height="20dp" />
 

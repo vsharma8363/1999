@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="@color/background_1999"
     tools:context=".ui.LoginSignup">
 
     <LinearLayout
@@ -20,8 +21,10 @@
             android:id="@+id/verification_code_field"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="10pt"
             android:ems="10"
             android:hint="ex: 123456"
+            android:gravity="center_horizontal"
             android:inputType="number" />
 
         <Button
@@ -29,6 +32,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="verifyCode"
+            android:background="@color/quantum_cyan"
+            android:textSize="8pt"
             android:text="Verify SMS" />
 
         <TextView
@@ -38,7 +43,8 @@
             android:gravity="center"
             android:onClick="resendVerification"
             android:text="Didn't get a code? Click here to resend"
-            android:textColor="@android:color/holo_blue_dark" />
+            android:textSize="7pt"
+            />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
