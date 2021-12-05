@@ -256,6 +256,7 @@
                     android:layout_height="@dimen/divider_size" />
 
                 <TextView
+                    android:id="@+id/activity_settings_safe_party_practices"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/divider_margin"
@@ -269,6 +270,7 @@
                     android:layout_height="@dimen/divider_size" />
 
                 <TextView
+                    android:id="@+id/activity_settings_feedback"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/divider_margin"
@@ -282,6 +284,7 @@
                     android:layout_height="@dimen/divider_size" />
 
                 <TextView
+                    android:id="@+id/activity_settings_rate_our_app"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="left"
@@ -295,6 +298,7 @@
                     android:layout_height="@dimen/divider_size" />
 
                 <TextView
+                    android:id="@+id/activity_settings_privacy_policy"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="left"
@@ -322,6 +326,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="@dimen/divider_size" />
                 <TextView
+                    android:id="@+id/activity_settings_alcohol_hotline"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="left"
@@ -333,6 +338,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="@dimen/divider_size" />
                 <TextView
+                    android:id="@+id/activity_settings_opiate_resources"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="left"
@@ -358,6 +364,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="@dimen/divider_size" />
                 <TextView
+                    android:id="@+id/activity_settings_logout"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="left"
