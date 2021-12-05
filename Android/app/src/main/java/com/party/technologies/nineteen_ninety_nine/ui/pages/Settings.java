@@ -7,8 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.party.technologies.nineteen_ninety_nine.R;
+import com.party.technologies.nineteen_ninety_nine.data.user.User;
+import com.party.technologies.nineteen_ninety_nine.data.user.UserInterface;
 import com.party.technologies.nineteen_ninety_nine.ui.Home;
 
 public class Settings extends AppCompatActivity {
@@ -26,6 +29,23 @@ public class Settings extends AppCompatActivity {
                         R.anim.slide_out_right);
             }
         });
+
+        User user = UserInterface.getCurrentUser();
+
+        TextView fullname = findViewById(R.id.activity_settings_fullname);
+        fullname.setText(user.getFullName());
+        TextView username = findViewById(R.id.activity_settings_username);
+        TextView age = findViewById(R.id.activity_settings_birthday);
+        age.setText(user.getAge());
+        TextView mobile = findViewById(R.id.activity_settings_mobile);
+        mobile.setText(user.getPhoneNumber());
+        TextView email = findViewById(R.id.activity_settings_email);
+        email.setText(user.getEmail());
+        TextView instagram = findViewById(R.id.activity_settings_instagram);
+        instagram.setText(user.getInstagramUserName());
+        TextView snapchat = findViewById(R.id.activity_settings_snapchat);
+
+
 
         /**
          * TODO(Bea): Create a list view like the one described under the "Settings" page in the wireframes.
