@@ -74,6 +74,7 @@ public class ViewUpcomingFragment extends Fragment {
     private LinearLayout getPartyView(Party party) {
         // Define overall part element
         LinearLayout partyElement = new LinearLayout(getActivity());
+        partyElement.setPadding(25,25,25,25);
         partyElement.setOrientation(LinearLayout.VERTICAL);
         // Party title
         TextView partyTitle = new TextView(getActivity());

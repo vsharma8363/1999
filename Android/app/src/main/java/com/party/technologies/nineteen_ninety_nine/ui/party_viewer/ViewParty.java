@@ -83,10 +83,9 @@ public class ViewParty extends AppCompatActivity implements OnMapReadyCallback {
         TextView dateTime = findViewById(R.id.activity_view_party_date_time);
         dateTime.setText(toHumanReadableDate(party.getStartTime())
                 + " - " + toHumanReadableDate(party.getEndTime()));
-        dateTime.setTextColor(Color.BLACK);
         partyAddress = ((TextView)findViewById(R.id.activity_view_party_address));
         partyAddress.setText(party.getAddress());
-        partyAddress.setTextColor(Color.BLUE);
+        partyAddress.setTextColor(Color.parseColor("#c542f5"));
         partyAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,6 +120,7 @@ public class ViewParty extends AppCompatActivity implements OnMapReadyCallback {
             applyForAttendance.setText("Party Unavailable");
         }
         else if (party.getHostID().equals(UserInterface.getCurrentUserUID())) {
+            addressData.setVisibility(VISIBLE);
             applyForAttendance.setText("Edit Party ✏");
             applyForAttendance.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -312,6 +312,11 @@ public class ViewParty extends AppCompatActivity implements OnMapReadyCallback {
                     overallBar.addView(reconsider);
                 }
                 guest_list_layout.addView(overallBar);
+                View v = new View(getApplicationContext());
+                v.setLayoutParams(new LinearLayout.LayoutParams(guest_list_layout.getWidth(), 5));
+                v.setBackgroundColor(Color.parseColor("#5237a6"));
+                guest_list_layout.addView(v);
+
             }
         }
     }

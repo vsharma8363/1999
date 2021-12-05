@@ -2,7 +2,10 @@ package com.party.technologies.nineteen_ninety_nine.ui.pages;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +16,7 @@ import com.party.technologies.nineteen_ninety_nine.R;
 import com.party.technologies.nineteen_ninety_nine.data.user.User;
 import com.party.technologies.nineteen_ninety_nine.data.user.UserInterface;
 import com.party.technologies.nineteen_ninety_nine.ui.Home;
+import com.party.technologies.nineteen_ninety_nine.ui.party_viewer.ViewParty;
 
 public class Settings extends AppCompatActivity {
 
@@ -34,7 +38,6 @@ public class Settings extends AppCompatActivity {
 
         TextView fullname = findViewById(R.id.activity_settings_fullname);
         fullname.setText(user.getFullName());
-        TextView username = findViewById(R.id.activity_settings_username);
         TextView age = findViewById(R.id.activity_settings_birthday);
         age.setText(user.getAge());
         TextView mobile = findViewById(R.id.activity_settings_mobile);
@@ -42,8 +45,24 @@ public class Settings extends AppCompatActivity {
         TextView email = findViewById(R.id.activity_settings_email);
         email.setText(user.getEmail());
         TextView instagram = findViewById(R.id.activity_settings_instagram);
-        instagram.setText(user.getInstagramUserName());
-        TextView snapchat = findViewById(R.id.activity_settings_snapchat);
+        instagram.setText("@" + user.getInstagramUserName());
+        instagram.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uri = Uri.parse("http://instagram.com/_u/" + user.getInstagramUserName());
+                Intent likeIng = new Intent(Intent.ACTION_VIEW, uri);
+
+                likeIng.setPackage("com.instagram.android");
+
+                try {
+                    Settings.this.startActivity(likeIng);
+                } catch (ActivityNotFoundException e) {
+                    Settings.this.startActivity(new Intent(Intent.ACTION_VIEW,
+                            Uri.parse("http://instagram.com/" + user.getInstagramUserName())));
+                }
+            }
+        });
+        instagram.setTextColor(Color.BLUE);
 
 
 

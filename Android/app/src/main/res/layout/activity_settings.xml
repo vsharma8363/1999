@@ -8,285 +8,379 @@
     tools:context=".ui.pages.Settings">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="26dp"
         tools:ignore="MissingConstraints">
 
-        <TextView
+        <Space
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/top_spacing" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
             android:gravity="center_horizontal"
-            android:text="Settings"
-            android:textSize="14pt" />
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:textColor="@color/quantum_googgreen"
-            android:textStyle="bold"
-            android:text="MY ACCOUNT"
-            android:textSize="9pt" />
+            <ImageButton
+                android:id="@+id/activity_settings_done_btn"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@null"
+                android:layout_weight="1"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/back" />
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="horizontal"
-            >
             <TextView
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_weight="100"
+                android:text="Settings"
+                android:textSize="14pt" />
+
+            <Space
+                android:layout_width="48dp"
                 android:layout_weight="1"
-                android:gravity="left"
-                android:text="Name"
-                android:textSize="9pt"
-                />
-            <TextView
-                android:id="@+id/activity_settings_fullname"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:text="Name"
-                android:textSize="9pt"
-                />
+                android:layout_height="48dp" />
+
         </LinearLayout>
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="horizontal"
-            >
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="left"
-                android:text="Username"
-                android:textSize="9pt"
-                />
-            <TextView
-                android:id="@+id/activity_settings_username"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:text="username"
-                android:textSize="9pt"
-                />
-        </LinearLayout>
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="horizontal"
-            >
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="left"
-                android:text="Age"
-                android:textSize="9pt"
-                />
-            <TextView
-                android:id="@+id/activity_settings_birthday"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:text="Birthday"
-                android:textSize="9pt"
-                />
-        </LinearLayout>
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="horizontal"
-            >
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="left"
-                android:text="Mobile No."
-                android:textSize="9pt"
-                />
-            <TextView
-                android:id="@+id/activity_settings_mobile"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:text="Mobile Number"
-                android:textSize="9pt"
-                />
-        </LinearLayout>
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="horizontal"
-            >
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="left"
-                android:text="Email"
-                android:textSize="9pt"
-                />
-            <TextView
-                android:id="@+id/activity_settings_email"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:text="Email"
-                android:textSize="9pt"
-                />
-        </LinearLayout>
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="horizontal"
-            >
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="left"
-                android:text="Instagram"
-                android:textSize="9pt"
-                />
-            <TextView
-                android:id="@+id/activity_settings_instagram"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:text="Instagram"
-                android:textSize="9pt"
-                />
-        </LinearLayout>
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="horizontal"
-            >
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="left"
-                android:text="Snapchat"
-                android:textSize="9pt"
-                />
-            <TextView
-                android:id="@+id/activity_settings_snapchat"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:text="Snapchat"
-                android:textSize="9pt"
-                />
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:textColor="@color/quantum_googgreen"
-            android:textStyle="bold"
-            android:text="Additional Services"
-            android:textSize="9pt" />
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:text="Safe Party Practices"
-            android:textSize="9pt" />
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:text="Feedback"
-            android:textSize="9pt" />
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:text="Rate Our App"
-            android:textSize="9pt" />
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:text="Privacy Policy"
-            android:textSize="9pt" />
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:text="Emergency Services"
-            android:textColor="#FF0000"
-            android:textStyle="bold"
-            android:textSize="9pt" />
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:text="Alcohol And Drug Addiction Hotline"
-            android:textSize="9pt" />
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:text="Opiate Overdose Resources"
-            android:textSize="9pt" />
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:textColor="@color/quantum_googgreen"
-            android:textStyle="bold"
-            android:text="Account Settings"
-            android:textSize="9pt" />
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:text="Logout"
-            android:textSize="9pt" />
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:text="Delete Account"
-            android:textSize="9pt" />
-
-<!--        <Space-->
-<!--            android:layout_width="fill_parent"-->
-<!--            android:layout_height="@dimen/top_spacing" />-->
-
-        <ImageButton
-            android:id="@+id/activity_settings_done_btn"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="@null"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/back" />
-
-<!--        <Space-->
-<!--            android:layout_width="fill_parent"-->
-<!--            android:layout_height="@dimen/top_spacing" />-->
+       <Space
+           android:layout_width="fill_parent"
+           android:layout_height="@dimen/top_spacing" />
 
         <ScrollView
             android:layout_width="fill_parent"
+            android:background="@color/settings_menu_bg"
             android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/setting_menu_bar"
+                android:orientation="vertical">
+
+                <View
+                    android:background="@color/list_divider"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/divider_size" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:padding="@dimen/divider_margin"
+                    android:textColor="@color/quantum_googgreen"
+                    android:background="@color/settings_menu_bg"
+                    android:textStyle="bold"
+                    android:text="MY ACCOUNT"
+                    android:textSize="9pt" />
+
+                <View
+                    android:background="@color/settings_menu_bg"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/divider_size" />
+
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:padding="@dimen/divider_margin"
+                    android:background="@color/setting_menu_bar"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        android:text="Name"
+                        android:textSize="9pt"
+                        />
+                    <TextView
+                        android:id="@+id/activity_settings_fullname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:gravity="right"
+                        android:text="Name"
+                        android:textSize="9pt"
+                        />
+                </LinearLayout>
+
+
+                <View
+                    android:background="@color/settings_menu_bg"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/divider_size" />
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@color/setting_menu_bar"
+                    android:padding="@dimen/divider_margin"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        android:text="Age"
+                        android:textSize="9pt"
+                        />
+                    <TextView
+                        android:id="@+id/activity_settings_birthday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:gravity="right"
+                        android:text="Birthday"
+                        android:textSize="9pt"
+                        />
+                </LinearLayout>
+
+                <View
+                    android:background="@color/settings_menu_bg"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/divider_size" />
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="horizontal"
+                    android:background="@color/setting_menu_bar"
+                    android:padding="@dimen/divider_margin"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        android:text="Mobile No."
+                        android:textSize="9pt"
+                        />
+                    <TextView
+                        android:id="@+id/activity_settings_mobile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:gravity="right"
+                        android:text="Mobile Number"
+                        android:textSize="9pt"
+                        />
+                </LinearLayout>
+
+                <View
+                    android:background="@color/settings_menu_bg"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/divider_size" />
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="fill_parent"
+                    android:padding="@dimen/divider_margin"
+                    android:layout_height="fill_parent"
+                    android:orientation="horizontal"
+                    android:background="@color/setting_menu_bar"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        android:text="Email"
+                        android:textSize="9pt"
+                        />
+                    <TextView
+                        android:id="@+id/activity_settings_email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:gravity="right"
+                        android:text="Email"
+                        android:textSize="9pt"
+                        />
+                </LinearLayout>
+
+                <View
+                    android:background="@color/settings_menu_bg"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/divider_size" />
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@color/setting_menu_bar"
+                    android:padding="@dimen/divider_margin"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        android:text="Instagram"
+                        android:textSize="9pt"
+                        />
+                    <TextView
+                        android:id="@+id/activity_settings_instagram"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:gravity="right"
+                        android:text="Instagram"
+                        android:textSize="9pt"
+                        />
+                </LinearLayout>
+
+                <View
+                    android:background="@color/settings_menu_bg"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/divider_size" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/divider_margin"
+                    android:gravity="left"
+                    android:textColor="@color/quantum_googgreen"
+                    android:background="@color/settings_menu_bg"
+                    android:textStyle="bold"
+                    android:text="Additional Services"
+                    android:textSize="9pt" />
+
+                <View
+                    android:background="@color/settings_menu_bg"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/divider_size" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/divider_margin"
+                    android:gravity="left"
+                    android:text="Safe Party Practices"
+                    android:textSize="9pt" />
+
+                <View
+                    android:background="@color/settings_menu_bg"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/divider_size" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/divider_margin"
+                    android:gravity="left"
+                    android:text="Feedback"
+                    android:textSize="9pt" />
+
+                <View
+                    android:background="@color/settings_menu_bg"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/divider_size" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:padding="@dimen/divider_margin"
+                    android:text="Rate Our App"
+                    android:textSize="9pt" />
+
+                <View
+                    android:background="@color/settings_menu_bg"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/divider_size" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:padding="@dimen/divider_margin"
+                    android:text="Privacy Policy"
+                    android:textSize="9pt" />
+
+                <View
+                    android:background="@color/settings_menu_bg"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/divider_size" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text="Emergency Services"
+                    android:padding="@dimen/divider_margin"
+                    android:textColor="#FF0000"
+                    android:textStyle="bold"
+                    android:background="@color/settings_menu_bg"
+                    android:textSize="9pt" />
+                <View
+                    android:background="@color/settings_menu_bg"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/divider_size" />
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:padding="@dimen/divider_margin"
+                    android:text="Alcohol And Drug Addiction Hotline"
+                    android:textSize="9pt" />
+                <View
+                    android:background="@color/settings_menu_bg"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/divider_size" />
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text="Opiate Overdose Resources"
+                    android:padding="@dimen/divider_margin"
+                    android:textSize="9pt" />
+                <View
+                    android:background="@color/settings_menu_bg"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/divider_size" />
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:padding="@dimen/divider_margin"
+                    android:background="@color/settings_menu_bg"
+                    android:textColor="@color/quantum_googgreen"
+                    android:textStyle="bold"
+                    android:text="Account Settings"
+                    android:textSize="9pt" />
+                <View
+                    android:background="@color/settings_menu_bg"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/divider_size" />
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:padding="@dimen/divider_margin"
+                    android:text="Logout"
+                    android:textSize="9pt" />
+                <View
+                    android:background="@color/settings_menu_bg"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/divider_size" />
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:padding="@dimen/divider_margin"
+                    android:text="Delete Account"
+                    android:textSize="9pt" />
+                <View
+                    android:background="@color/settings_menu_bg"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/divider_size" />
+
+            </LinearLayout>
 
 
         </ScrollView>
