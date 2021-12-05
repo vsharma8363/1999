@@ -63,6 +63,56 @@ public class Settings extends AppCompatActivity {
             }
         });
         instagram.setTextColor(Color.BLUE);
+        TextView safe_party_practices = findViewById(R.id.activity_settings_safe_party_practices);
+        safe_party_practices.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        TextView feedback = findViewById(R.id.activity_settings_feedback);
+        feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        TextView rate_our_app = findViewById(R.id.activity_settings_rate_our_app);
+        rate_our_app.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        TextView privacy_policy = findViewById(R.id.activity_settings_privacy_policy);
+        privacy_policy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        TextView alcohol_drug_hotline = findViewById(R.id.activity_settings_alcohol_hotline);
+        alcohol_drug_hotline.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        TextView opiate_resources = findViewById(R.id.activity_settings_opiate_resources);
+        opiate_resources.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        TextView logout = findViewById(R.id.activity_settings_logout);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
 
 
 
