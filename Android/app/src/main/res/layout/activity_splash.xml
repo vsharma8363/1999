@@ -8,4 +8,16 @@
     tools:context=".ui.Splash">
 
 
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:src="@drawable/logo" />
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
