@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.1999.NoActionBar">
         <activity
+            android:name=".ui.EditProfile"
+            android:exported="false" />
+        <activity
             android:name=".ui.party_viewer.ScreenGuests"
             android:exported="false" />
         <activity

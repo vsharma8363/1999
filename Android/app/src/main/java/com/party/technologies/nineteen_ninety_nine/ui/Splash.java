@@ -2,7 +2,11 @@ package com.party.technologies.nineteen_ninety_nine.ui;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.party.technologies.nineteen_ninety_nine.R;
@@ -18,7 +22,6 @@ public class Splash extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        Splash.this.startActivity(new Intent(Splash.this, EditProfile.class));
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         // 5 second splash screen.
