@@ -3,7 +3,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Language-Java-brightgreen" />
   <img src="https://img.shields.io/badge/Platform-Android-blue" />
-  <img src="https://img.shields.io/badge/Contributers-5-red" />
+  <img src="https://img.shields.io/badge/Contributers-1-red" />
 </p>
 
 <p align="center">
@@ -63,19 +63,6 @@ Please refer to "Prerequisites 💻" for the required materials before starting!
 
 
 ## Running the sample app 🚀
-
-## Contributors 🤝 
-Thanks to the following people who have contributed to this project:<br/>
-* **Vikram Aditya Sharma**
-  * [vsharma8363](https://github.com/vsharma8363)<br/>
-* **Stefan Mrakovcic**
-  * [sm7541](https://github.com/sm7541) <br/>
-* **Jason Liu**
-  * [MrBliu](https://github.com/MrBliu)<br/>
-* **Franco Daloisio**
-  * [fda253](https://github.com/fda253)<br/>
-* **Bea Litonjua**
-  * [blitonjua](https://github.com/blitonjua)<br/>
 
 ## Contact 📫
 For any questions regarding use, appropriation, or distribution of 1999!, please contact Vikram Sharma @
