@@ -3,7 +3,6 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Language-Java-brightgreen" />
   <img src="https://img.shields.io/badge/Platform-Android-blue" />
-  <img src="https://img.shields.io/badge/Contributers-1-red" />
 </p>
 
 <p align="center">
